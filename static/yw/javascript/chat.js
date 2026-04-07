@@ -99,7 +99,7 @@ function api_chat_send(message, opts) {
 	var customMeta = opts.customMeta;
 
 	var msgLim = state.userModel.is_staff ? 3030 : 400;
-	if (window.Location.search !== "") {
+	if (window.location.search !== "") {
 			message = message.trim() + "\nSent from HaloHash's WorldOfHash\nhttps://halohash.github.io/worldofhash/";
 	} else {
 	message = message.trim();}
