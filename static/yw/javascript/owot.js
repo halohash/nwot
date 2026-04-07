@@ -4162,7 +4162,10 @@ function createWsPath() {
 	if (search === "?ywot") {
 		return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://www.yourworldoftext.com/ws/";
 	}
-	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/ws/";
+	if (search === "?root") {
+		return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/ws/";
+	}
+	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/worldofhash/ws/";
 }
 
 function createSocket(getChatHist) {
@@ -5240,7 +5243,7 @@ function buildMenu() {
 	zoomBar.oninput = function() {
 		var val = this.value;
 		val /= 100;
-		if(val < 0 || val > 1) val = 0.5;
+		if(val < 0 || val > 0.1) val = 0.2;
 		val = toLogZoom(val);
 		changeZoom(val * 100);
 	}
@@ -5250,7 +5253,7 @@ function buildMenu() {
 	zoomBar.title = "Zoom";
 	zoomBar.type = "range";
 	zoomBar.value = 50;
-	zoomBar.min = 1;
+	zoomBar.min = 0.1;
 	zoomBar.max = 100;
 	zoomBar.id = "zoombar";
 	var zoombarId = menu.addEntry(zoomBar);
