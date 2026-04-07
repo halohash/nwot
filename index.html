@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Our World of Text</title>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta name="description" content="Infinitely large website. Write anywhere.">
+		<meta property="og:image" content="/static/logo.png">
+		<link type="text/css" rel="stylesheet" href="/static/css/yourworld.css">
+		
+	</head>
+	<body>
+		<div id="main_view">
+			<canvas id="owot" class="screen_canvas" style="display: none;"></canvas>
+		</div>
+		<a href="javascript: void 0;" id="link_element" title="Link to url..." target="_blank" style="cursor: pointer;">
+			<div id="link_div"></div>
+		</a>
+		<div id="topbar" class="ui">
+			<div id="topbar_inner">
+				<div id="announce_container"></div>
+				<span id="menu" class="ui-vis tab menu" style="display: none;">
+					<img src="/static/pin.svg" class="menuPin" style="display: none;">
+					<span class="menuText">Menu</span>
+					<span style="font-size:50%">▼</span>
+				</span>
+			</div>
+		</div>
+		<div id="nav" class="ui menu ui-vis" style="display: none;">
+			<ul></ul>
+		</div>
+		<div id="coords" class="ui ui-vis" style="display: none;">
+			X: <span id="coord_X"></span>
+			Y: <span id="coord_Y"></span>
+			<div id="cursor_coords" style="display: none;">
+				Cursor:
+				<span id="cursor_on" style="display: none;">
+					<span id="tile_X"></span>, <span id="tile_Y"></span> /
+					<span id="char_X"></span>, <span id="char_Y"></span>
+				</span>
+				<span id="cursor_off" style="display: none">
+					N/A
+				</span>
+			</div>
+		</div>
+
+		<div id="modal_overlay" style="display: none;"></div>
+		<div id="link_tooltip" class="tooltip" style="display: none;"></div>
+
+		<h1 id="loading">Loading...</h1>
+		<div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="7ccd6dcbbf2863b75b62d4ebd9a9c67b11ab7d3b" /></div>
+		<script>
+			var state = {"userModel":{"username":"GuhCDN","is_superuser":false,"authenticated":true,"is_member":false,"is_owner":false,"is_staff":false,"is_operator":false},"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":"","chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":-1,"char_rate":[512,1000],"write_interval":1000,"no_copy":false,"no_chat_global":false,"color_palette":[0,1,128,255,20608,32768,32896,33023,43775,52416,55552,65280,65442,65535,1194684,3227993,4210752,4469691,7248330,8388352,8388608,8388736,8388863,8404992,8421376,8421504,8900331,9449273,12246302,12632256,12648430,13631488,16405279,16436888,16711680,16711808,16711935,16744448,16744576,16749507,16761035,16766720,16776960,16777215],"bg_color_palette":[14477635]},"background":{"path":"/static/files/you-get-extra-week-of-chat-tag-if-youre-first-to-point-this-name-out.png","rmod":1,"alpha":1}};
+		</script>
+
+		<textarea autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" style="left: -1000px; top: -1000px; position: absolute;" id="textInput"></textarea>
+
+		<div id="west_gui">
+			<div id="text_decorations" style="display: none">
+				<div class="text_deco_btn" id="text_deco_b" title="Bold">A</div>
+				<div class="text_deco_btn" id="text_deco_i" title="Italic">A</div>
+				<div class="text_deco_btn" id="text_deco_u" title="Underline">A</div>
+				<div class="text_deco_btn" id="text_deco_s" title="Strikethrough">A</div>
+			</div>
+			<br>
+			<div id="erase_region" style="display: none">
+				<div style="padding-bottom: 3px; font-weight: bold; text-align: center;">
+					Erase region
+				</div>
+				<label style="display: block;">
+					<input type="radio" name="erase_region_opt" id="erase_region_once" checked> Only once
+				</label>
+				<label style="display: block;">
+					<input type="radio" name="erase_region_opt" id="erase_region_mult"> Multiple
+				</label>
+				<label style="display: block;">
+					<input type="radio" name="erase_region_opt" id="erase_region_ctrl"> Hold Ctrl
+				</label>
+				<hr>
+				<label style="display: block;">
+					<input type="checkbox" id="erase_region_snap"> Snap to grid
+				</label>
+				<a id="erase_region_cancel" onclick="stopEraseUI();">Cancel</a>
+			</div>
+			<div id="protect_precision" style="display: none;">
+				<div style="padding-bottom: 3px;">
+					Protect type:
+				</div>
+				<div class="protect_button" id="tile_choice" onclick="protectPrecisionOption(0);">
+					Tile
+				</div>
+				<div class="protect_button" id="char_choice" onclick="protectPrecisionOption(1);">
+					Char
+				</div>
+				<a id="protect_selection" onclick="protectSelection();">Select</a>
+			</div>
+			<div id="auto_prog" class="auto_prog_panel" style="display: none"></div>
+		</div>
+
+		<div id="chat_open" class="ui-vis ui" style="display: none;">
+			<span>Chat<b id="total_unread" class="unread" style="display: none;">(-)</b></span>
+		</div>
+		<div id="chat_window" style="width: 400px; height: 300px; bottom: 0px; left: 0px; display: none;">
+			<div id="chat_upper" style="padding: 3px; padding-bottom: 0px;">
+				<div class="chat_tab_button chat_tab_selected" id="chat_page_tab">
+					This page<b id="page_unread" class="unread" style="display: none;">(-)</b>
+				</div><div class="chat_tab_button" id="chat_global_tab">
+					Global<b id="global_unread" class="unread" style="display: none;">(-)</b>
+				</div>
+				<span id="usr_online"></span>
+				<div id="chat_close">X</div>
+			</div>
+			<div class="chatfield" id="page_chatfield"></div>
+			<div class="chatfield" id="global_chatfield" style="display: none;"></div>
+			<div id="chat_lower" style="width: 100%; display: flex;">
+				<input style="width: 100%; margin: 3px; margin-right: 0px;" id="chatbar" autocomplete="off" aria-autocomplete="list">
+				<button id="chatsend" style="margin: 3px;">Send</button>
+			</div>
+		</div>
+		<div id="confirm_js" style="display: none; top: 50px; left: 100px;">
+			<a href="javascript:void 0;" id="run_js_confirm">run</a>
+			<span id="confirm_js_msg">
+				--
+			</span>
+			<span id="confirm_js_code">
+				--
+			</span>
+			<a href="javascript:void 0;" id="confirm_js_copy">copy</a>
+			<div id="confirm_js_cancel">
+				Close
+			</div>
+			<div id="confirm_js_cancel_x">
+				X
+			</div>
+		</div>
+
+		<script src="/static/yw/javascript/helpers.js"></script>
+		<script src="/static/lib/jscolor.min.js"></script>
+		<script src="/static/yw/javascript/modals.js"></script>
+		<script src="/static/yw/javascript/menu.js"></script>
+		<script src="/static/yw/javascript/permissions.js"></script>
+		<script src="/static/yw/javascript/chat.js"></script>
+		<script src="/static/yw/javascript/renderer.js"></script>
+		<script src="/static/yw/javascript/owot.js"></script>
+	</body>
+</html>
