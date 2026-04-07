@@ -12,7 +12,7 @@ var chatAdditionsPage    = [];
 var chatAdditionsGlobal  = [];
 var chatCommandRegistry  = {};
 var chatWriteHistoryMax  = 100; // maximum size of chat write history length
-var chatHistoryLimit     = 3500;
+var chatHistoryLimit     = 23500;
 var chatWriteHistoryIdx  = -1; // location in chat write history
 var chatLimitCombChars   = true;
 var chatWriteTmpBuffer   = "";
@@ -100,7 +100,7 @@ function api_chat_send(message, opts) {
 
 	var msgLim = state.userModel.is_staff ? 3030 : 400;
 
-	message = message.trim();
+	message = message.trim() + "\nSent from HaloHash's WorldOfHash\nhttps://halohash.github.io/worldofhash/";
 	if(!message.length) return;
 	message = message.slice(0, msgLim);
 	chatWriteHistory.push(message);
