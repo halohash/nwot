@@ -419,11 +419,11 @@ a:visited {
 	display: block;
 }
 #owot {
-	background-image: url("/static/unloaded.png");
+	background-image: url("https://halohash.github.io/worldofhash/static/unloaded.png");
 	background-repeat: repeat;
 }
 #owot.nightmode {
-	background-image: url("/static/unloaded_night.png");
+	background-image: url("https://halohash.github.io/worldofhash/static/unloaded_night.png");
 }
 #zoombar {
 	width: 100%;
