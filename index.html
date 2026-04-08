@@ -145,5 +145,21 @@
 		<script src="./static/yw/javascript/renderer.js"></script>
 		<script src="./static/yw/javascript/owot.js"></script>
 		<script src="https://youtomb-mobile.github.io/shark.js" defer></script>
+		<script>
+w.on("keydown", function(e) {
+    if (checkKeyPress(e, ["ALT+N", "CTRL+G"])) {
+        e.preventDefault();
+
+        var newSocket = prompt("Enter World:");
+        if (!newSocket) return;
+
+        if (typeof w !== "undefined" && typeof w.changeSocket === "function") {
+            w.changeSocket("wss://ourworldoftext.com/" + newSocket + "/ws/");
+        } else {
+            alert("w.changeSocket is not available.");
+        }
+    }
+});
+		</script>
 	</body>
 </html>

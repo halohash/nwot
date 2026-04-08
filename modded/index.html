@@ -328,9 +328,24 @@ menu.addOption('Image Paster', async () => {
 });
 </script>
 <script>
+
 menu.addOption("Paint",
 (function(){	w.loadScript("https://ourworldoftext.com/static/files/paint_1699.js")})
 )
+w.on("keydown", function(e) {
+    if (checkKeyPress(e, ["ALT+N", "CTRL+G"])) {
+        e.preventDefault();
+
+        var newSocket = prompt("Enter World:");
+        if (!newSocket) return;
+
+        if (typeof w !== "undefined" && typeof w.changeSocket === "function") {
+            w.changeSocket("wss://ourworldoftext.com/" + newSocket + "/ws/");
+        } else {
+            alert("w.changeSocket is not available.");
+        }
+    }
+});
 </script>
 	</body>
 </html>
