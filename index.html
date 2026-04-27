@@ -259,7 +259,39 @@ w.on("chatmod", () => {
     audio.currentTime = 0;
     audio.play();
 });
-			ondblclick = e => {    firecrack.play();    po = getTileCoordsFromMouseCoords(e.clientX, e.clientY);    curX = po[0] * 16 + po[2];    curY = po[1] * 8 + po[3];    writeCharToXY("🌮", 0, curX, curY);    setTimeout(_ => {        writeCharToXY("🌮", 0, curX, curY)    }, 200);    setTimeout(_ => {        for (i = 0; i < Math.floor(Math.random() * 34); i++) {            writeCharToXY("🌮", 0, curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20), curY + Math.floor(Math.random() * 10))        }    }, 4);};firecrack = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/snd_buttonselect.wav") 
+			ondblclick = e => {    firecrack.play();    po = getTileCoordsFromMouseCoords(e.clientX, e.clientY);    curX = po[0] * 16 + po[2];    curY = po[1] * 8 + po[3];    writeCharToXY("🌮", 0, curX, curY);    setTimeout(_ => {        writeCharToXY("🌮", 0, curX, curY)    }, 200);    setTimeout(_ => {        for (i = 0; i < Math.floor(Math.random() * 34); i++) {            writeCharToXY("🌮", 0, curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20), curY + Math.floor(Math.random() * 10))        }    }, 4);};firecrack = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/snd_buttonselect.wav")
+			if (window.location.search.includes("tacomode")) {
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    setInterval(() => {
+        const po = getTileCoordsFromMouseCoords(mouseX, mouseY);
+        const curX = po[0] * 16 + po[2];
+        const curY = po[1] * 8 + po[3];
+
+        writeCharToXY("🌮", 0, curX, curY);
+
+        setTimeout(() => {
+            writeCharToXY("🌮", 0, curX, curY);
+        }, 200);
+
+        setTimeout(() => {
+            for (let i = 0; i < Math.floor(Math.random() * 34); i++) {
+                writeCharToXY(
+                    "🌮",
+                    0,
+                    curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20),
+                    curY + Math.floor(Math.random() * 10)
+                );
+            }
+        }, 4);
+    }, 10);
+}
 		</script>
 	</body>
 </html>
