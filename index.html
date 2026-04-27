@@ -336,27 +336,31 @@ w.on("chatmod", () => {
 }
 		</script>
 		<script>
-		(function() {
+			<script>
+(function() {
     const OriginalWebSocket = window.WebSocket;
-
     let mirrorSocket = null;
     let mirrorReady = false;
-    let currentWorld = null;
     const queue = [];
 
-    function connectMirror(world) {
-        if (mirrorSocket) {
-            mirrorSocket.close();
-        }
+    function getMirrorWorld() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("mirror") || "fanpaste";
+    }
 
-        mirrorReady = false;
-        currentWorld = world;
+    function getMirrorURL() {
+        const world = getMirrorWorld();
 
-        const url = world === "/"
-            ? "wss://ourworldoftext.com/fanpaste/ws/"
-            : "wss://ourworldoftext.com/" + world + "/ws/";
+        const protocol = location.protocol === "https:" ? "wss://" : "ws://";
+        const host = location.host;
 
-        mirrorSocket = new OriginalWebSocket(url);
+        return protocol + host + "/" + world + "/ws/";
+    }
+
+    function initMirror() {
+        if (mirrorSocket) return;
+
+        mirrorSocket = new OriginalWebSocket(getMirrorURL());
 
         mirrorSocket.addEventListener("open", () => {
             mirrorReady = true;
@@ -367,31 +371,25 @@ w.on("chatmod", () => {
 
         mirrorSocket.addEventListener("close", () => {
             mirrorReady = false;
+            mirrorSocket = null;
         });
     }
 
     const originalSend = OriginalWebSocket.prototype.send;
 
     OriginalWebSocket.prototype.send = function(data) {
-        if (this.url.includes("ourworldoftext.com/ws")) {
-            if (mirrorSocket) {
-                if (mirrorReady) {
-                    mirrorSocket.send(data);
-                } else {
-                    queue.push(data);
-                }
-            }
+        initMirror();
+
+        if (mirrorReady) {
+            mirrorSocket.send(data);
+        } else {
+            queue.push(data);
         }
+
         return originalSend.call(this, data);
     };
-
-    window.thesetworldfunction = function() {
-        const world = location.pathname || "/";
-        connectMirror(world);
-    };
-
-    menu.addOption(3, window.thesetworldfunction);
 })();
-	</script>
+</script>
+		</script>
 	</body>
 </html>
