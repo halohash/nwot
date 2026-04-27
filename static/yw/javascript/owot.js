@@ -4157,7 +4157,7 @@ function checkKeyPatterns(combination) {
 }
 
 function createWsPath() {
-	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com" + location.pathname + "/ws/";
+	if (location.pathname === "/") then {return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/ws/";} else {return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/" + location.pathname + "/ws/";}
 }
 
 function createSocket(getChatHist) {
