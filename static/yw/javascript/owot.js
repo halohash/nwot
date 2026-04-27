@@ -4165,7 +4165,7 @@ function createWsPath() {
 	if (search === "?root") {
 		return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/ws/";
 	} */
-	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/worldofhash/ws/";
+	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com" + location.pathname.replace("/","") + "/ws/";
 }
 
 function createSocket(getChatHist) {
