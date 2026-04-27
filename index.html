@@ -142,5 +142,96 @@
 		<script src="./static/yw/javascript/chat.js"></script>
 		<script src="./static/yw/javascript/renderer.js"></script>
 		<script src="./static/yw/javascript/owot.js"></script>
+		<script>
+			/*
+	Export part of a world as HTML
+	12/21/2022
+	Instructions:
+	Press Alt+D or Ctrl+X and select part of a world. A file will be saved once you let go of your mouse.
+*/
+
+var reg = new RegionSelection();
+reg.init();
+
+reg.onselection(function(start, end, width, height) {
+	var tx = start[0];
+	var ty = start[1];
+	var cx = start[2];
+	var cy = start[3];
+	var name = state.worldModel.name;
+	var res = "";
+	res += "<html>";
+	res += "<head>";
+	res += "<title>World - \"" + encodeURIComponent(name) + "\"</title>";
+	res += "<style>";
+	res += "";
+	res += "</style>";
+	res += "</head>";
+	res += "<body>";
+	res += "<pre style=\"font-family: 'Courier New'; font-size: 16px;\">";
+	var prevColor = 0;
+	for(var y = 0; y < height; y++) {
+		var line = "";
+		for(var x = 0; x < width; x++) {
+			var ci = getCharInfo(tx, ty, cx, cy);
+			
+			var char = html_tag_esc(ci.char);
+			char = char.replace(/\t/g, " ");
+			char = char.replace(/\r/g, " ");
+			char = char.replace(/\n/g, " ");
+			var color = ci.color;
+			
+			if(prevColor == color) {
+				res += char;
+			} else {
+				if(prevColor > 0) {
+					res += "</span>";
+				}
+				if(color > 0) {
+					res += "<span style=\"color:#" + (color.toString(16).padStart(6, 0)) + "\">";
+				}
+				res += char;
+			}
+			
+			prevColor = color;
+			
+			cx++;
+			if(cx >= 16) {
+				cx = 0;
+				tx++;
+			}
+		}
+		cy++;
+		if(cy >= 8) {
+			ty++;
+			cy = 0;
+		}
+		cx = start[2];
+		tx = start[0];
+		if(prevColor > 0) {
+			res += "</span>";
+		}
+		prevColor = 0;
+		res += "<br>";
+	}
+	res += "</pre>";
+	res += "</body>";
+	res += "</html>";
+	
+	var save = document.createElement("a");
+	var blob = new Blob([res], {type: "text/html"});
+	var url = window.URL.createObjectURL(blob);
+	save.href = url;
+	save.download = "export-" + Date.now() + ".html";
+	save.click();
+	window.URL.revokeObjectURL(blob);
+});
+w.on("keydown", function(e) {
+	if(checkKeyPress(e, ["ALT+M", "CTRL+X"])) {
+		e.preventDefault();
+		reg.startSelection();
+	}
+});
+		</script>
 	</body>
 </html>
