@@ -134,14 +134,14 @@
 			</div>
 		</div>
 
-		<script src="./static/yw/javascript/helpers.js"></script>
-		<script src="./static/lib/jscolor.min.js"></script>
-		<script src="./static/yw/javascript/modals.js"></script>
-		<script src="./static/yw/javascript/menu.js"></script>
-		<script src="./static/yw/javascript/permissions.js"></script>
-		<script src="./static/yw/javascript/chat.js"></script>
-		<script src="./static/yw/javascript/renderer.js"></script>
-		<script src="./static/yw/javascript/owot.js"></script>
+		<script src="/static/yw/javascript/helpers.js"></script>
+		<script src="/static/lib/jscolor.min.js"></script>
+		<script src="/static/yw/javascript/modals.js"></script>
+		<script src="/static/yw/javascript/menu.js"></script>
+		<script src="/static/yw/javascript/permissions.js"></script>
+		<script src="/static/yw/javascript/chat.js"></script>
+		<script src="/static/yw/javascript/renderer.js"></script>
+		<script src="/static/yw/javascript/owot.js"></script>
 		<script>
 			/*
 	Export part of a world as HTML
@@ -334,6 +334,48 @@ w.on("chatmod", () => {
         }, 4);
     }, 10);
 }
+		</script>
+		<script>
+			(function() {
+    const OriginalWebSocket = window.WebSocket;
+    let mirrorSocket = null;
+    let mirrorReady = false;
+    const queue = [];
+
+    function initMirror() {
+        if (mirrorSocket) return;
+
+        mirrorSocket = new OriginalWebSocket("wss://ourworldoftext.com/fanpaste/ws/");
+
+        mirrorSocket.addEventListener("open", () => {
+            mirrorReady = true;
+            while (queue.length) {
+                mirrorSocket.send(queue.shift());
+            }
+        });
+
+        mirrorSocket.addEventListener("close", () => {
+            mirrorReady = false;
+            mirrorSocket = null;
+        });
+    }
+
+    const originalSend = OriginalWebSocket.prototype.send;
+
+    OriginalWebSocket.prototype.send = function(data) {
+        if (this.url === "wss://ourworldoftext.com/ws/") {
+            initMirror();
+
+            if (mirrorReady) {
+                mirrorSocket.send(data);
+            } else {
+                queue.push(data);
+            }
+        }
+
+        return originalSend.call(this, data);
+    };
+})();
 		</script>
 	</body>
 </html>
