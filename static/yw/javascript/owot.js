@@ -4157,15 +4157,7 @@ function checkKeyPatterns(combination) {
 }
 
 function createWsPath() {
-	var search = window.location.search;
-	if(!search) search = "";
-	/* if (search === "?ywot") {
-		return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://www.yourworldoftext.com/ws/";
-	}
-	if (search === "?root") {
-		return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com/ws/";
-	} */
-	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com" + location.pathname.replace("/","") + "/ws/";
+	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://ourworldoftext.com" + location.pathname + "/ws/";
 }
 
 function createSocket(getChatHist) {
