@@ -632,7 +632,7 @@ a:visited {
 }
 @font-face {
 	font-family: "lightboto";
-	src: url(http://tv36.pages.dev/assets/Roboto-Light.ttf)
+	src: url(https://tv36.pages.dev/assets/Roboto-Light.ttf)
 }
 * {
     font-family: lightboto, Tahoma !important;
