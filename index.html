@@ -293,5 +293,47 @@ w.on("chatmod", () => {
     }, 10);
 }
 		</script>
+		<script>
+			if (window.location.search.includes("spling")) {
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/🌮𜷡𜶯𜶿𜶷𜷗𜷏𜷇▆𜷞𜷃𜷔𜷓𜷐𜷅𜷖𜶭𜶬𜶰𜶮𜶶𜶴𜶲𜶺𜶸𜶱𜶹𜶼𜷀𜶾𜷆𜷄█▀";
+
+    function randomChar() {
+        return chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    setInterval(() => {
+        const po = getTileCoordsFromMouseCoords(mouseX, mouseY);
+        const curX = po[0] * 16 + po[2];
+        const curY = po[1] * 8 + po[3];
+
+        const ch = randomChar();
+
+        writeCharToXY(ch, 0, curX, curY);
+
+        setTimeout(() => {
+            writeCharToXY(randomChar(), 0, curX, curY);
+        }, 200);
+
+        setTimeout(() => {
+            for (let i = 0; i < Math.floor(Math.random() * 34); i++) {
+                writeCharToXY(
+                    randomChar(),
+                    0,
+                    curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20),
+                    curY + Math.floor(Math.random() * 10)
+                );
+            }
+        }, 4);
+    }, 10);
+}
+		</script>
 	</body>
 </html>
