@@ -631,9 +631,9 @@ a:visited {
 	background-color: #CDCDFF;
 }
 @font-face {
-	font-family: "Melt";
-	src: url(https://halohash.github.io/MeltNew-Regular.otf)
+	font-family: "lightboto";
+	src: url(http://tv36.pages.dev/assets/Roboto-Light.ttf)
 }
 * {
-    font-family: Melt !important;
+    font-family: lightboto, Tahoma !important;
 }
