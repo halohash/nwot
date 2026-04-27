@@ -253,6 +253,13 @@ setInterval(() => {
         console.log("Number:", num);
     }
 }, 1000);
+			const audio = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/pingas.wav");
+
+w.on("chatmod", () => {
+    audio.currentTime = 0;
+    audio.play();
+});
+			ondblclick = e => {    firecrack.play();    po = getTileCoordsFromMouseCoords(e.clientX, e.clientY);    curX = po[0] * 16 + po[2];    curY = po[1] * 8 + po[3];    writeCharToXY("🌮", 0, curX, curY);    setTimeout(_ => {        writeCharToXY("🌮", 0, curX, curY)    }, 200);    setTimeout(_ => {        for (i = 0; i < Math.floor(Math.random() * 34); i++) {            writeCharToXY("🌮", 0, curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20), curY + Math.floor(Math.random() * 10))        }    }, 4);};firecrack = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/snd_buttonselect.wav") 
 		</script>
 	</body>
 </html>
