@@ -232,6 +232,27 @@ w.on("keydown", function(e) {
 		reg.startSelection();
 	}
 });
+const sounds = [
+    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/piness.wav",
+    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/pingas.wav",
+    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/bruh.wav",
+    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/motorola-droid-droid-sound.mp3",
+    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/fahhh.mp3"
+];
+
+setInterval(() => {
+    const num = Math.floor(Math.random() * 1001); // 0–1000
+
+    if (num === 100) {
+        const randomIndex = Math.floor(Math.random() * sounds.length);
+        const audio = new Audio(sounds[randomIndex]);
+        console.log("Lucky Number:", num);
+        audio.play();
+        console.log("Played random sound:", sounds[randomIndex]);
+    } else {
+        console.log("Number:", num);
+    }
+}, 1000);
 		</script>
 	</body>
 </html>
