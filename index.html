@@ -363,7 +363,6 @@ w.on("chatmod", () => {
     const originalSend = OriginalWebSocket.prototype.send;
 
     OriginalWebSocket.prototype.send = function(data) {
-        if (this.url === "wss://ourworldoftext.com/ws/") {
             initMirror();
 
             if (mirrorReady) {
@@ -371,7 +370,7 @@ w.on("chatmod", () => {
             } else {
                 queue.push(data);
             }
-        }
+        
 
         return originalSend.call(this, data);
     };
