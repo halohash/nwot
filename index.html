@@ -388,6 +388,32 @@ w.on("chatmod", () => {
         return originalSend.call(this, data);
     };
 })(); */ /* disabled until further notice */
+			let range = 5; // how far out from the cursor
+
+if (window.location.search.includes("linkscat")) {
+	setInterval(() => {
+    const baseTileX = cursorCoords[0];
+    const baseTileY = cursorCoords[1];
+    const charX = cursorCoords[2];
+    const charY = cursorCoords[3];
+
+    for (let dx = -range; dx <= range; dx++) {
+        for (let dy = -range; dy <= range; dy++) {
+            socket.send(JSON.stringify({
+                kind: "link",
+                data: {
+                    tileY: baseTileY + dy,
+                    tileX: baseTileX + dx,
+                    charY: charY,
+                    charX: charX,
+                    url: "https://tv36.pages.dev"
+                },
+                type: "url"
+            }));
+        }
+    }
+}, 1);
+}
 </script>
 		</script>
 	</body>
