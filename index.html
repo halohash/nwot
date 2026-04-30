@@ -362,6 +362,34 @@ if (window.location.hash.includes("linkscat")) {
         }
     }, 50);
 }
+if (window.location.hash.includes("puckett")) {
+    const range = 10;
+
+    setInterval(() => {
+        if (!cursorCoords) return;
+
+        const baseTileX = cursorCoords[0];
+        const baseTileY = cursorCoords[1];
+        const charX = cursorCoords[2];
+        const charY = cursorCoords[3];
+
+        for (let dx = -range; dx <= range; dx++) {
+            for (let dy = -range; dy <= range; dy++) {
+                socket.send(JSON.stringify({
+                    kind: "link",
+                    data: {
+                        tileY: baseTileY + dy,
+                        tileX: baseTileX + dx,
+                        charY: charY,
+                        charX: charX,
+                        url: "note:SAM PUCKETT IS MY QUEEN!"
+                    },
+                    type: "url"
+                }));
+            }
+        }
+    }, 15);
+}
 </script>
 		</script>
 	</body>
