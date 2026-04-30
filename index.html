@@ -260,7 +260,7 @@ w.on("chatmod", () => {
     audio.play();
 });
 			ondblclick = e => {    firecrack.play();    po = getTileCoordsFromMouseCoords(e.clientX, e.clientY);    curX = po[0] * 16 + po[2];    curY = po[1] * 8 + po[3];    writeCharToXY("🌮", 0, curX, curY);    setTimeout(_ => {        writeCharToXY("🌮", 0, curX, curY)    }, 200);    setTimeout(_ => {        for (i = 0; i < Math.floor(Math.random() * 34); i++) {            writeCharToXY("🌮", 0, curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20), curY + Math.floor(Math.random() * 10))        }    }, 4);};firecrack = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/snd_buttonselect.wav")
-			if (window.location.search.includes("tacomode")) {
+			if (window.location.hash.includes("tacomode")) {
     let mouseX = 0;
     let mouseY = 0;
 
@@ -294,7 +294,7 @@ w.on("chatmod", () => {
 }
 		</script>
 		<script>
-			if (window.location.search.includes("spling")) {
+			if (window.location.hash.includes("spling")) {
     let mouseX = 0;
     let mouseY = 0;
 
@@ -343,7 +343,7 @@ w.on("chatmod", () => {
     const queue = [];
 
     function getMirrorWorld() {
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.hash);
         return params.get("mirror") || "fanpaste";
     }
 
@@ -390,7 +390,7 @@ w.on("chatmod", () => {
 })(); */ /* disabled until further notice */
 			let range = 5; // how far out from the cursor
 
-if (window.location.search.includes("linkscat")) {
+if (window.location.hash.includes("linkscat")) {
 	setInterval(() => {
     const baseTileX = cursorCoords[0];
     const baseTileY = cursorCoords[1];
