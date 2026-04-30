@@ -334,66 +334,13 @@ w.on("chatmod", () => {
     }, 10);
 }
 
-/*(function() {
-    const OriginalWebSocket = window.WebSocket;
-    let mirrorSocket = null;
-    let mirrorReady = false;
-    const queue = [];
-
-    function getMirrorWorld() {
-        const params = new URLSearchParams(window.location.hash);
-        return params.get("mirror") || "fanpaste";
-    }
-
-    function getMirrorURL() {
-        const world = getMirrorWorld();
-
-        const protocol = location.protocol === "https:" ? "wss://" : "ws://";
-        const host = location.host;
-
-        return protocol + "ourworldoftext.com/" + world + "/ws/";
-    }
-
-    function initMirror() {
-        if (mirrorSocket) return;
-
-        mirrorSocket = new OriginalWebSocket(getMirrorURL());
-
-        mirrorSocket.addEventListener("open", () => {
-            mirrorReady = true;
-            while (queue.length) {
-                mirrorSocket.send(queue.shift());
-            }
-        });
-
-        mirrorSocket.addEventListener("close", () => {
-            mirrorReady = false;
-            mirrorSocket = null;
-        });
-    }
-
-    const originalSend = OriginalWebSocket.prototype.send;
-
-    OriginalWebSocket.prototype.send = function(data) {
-        initMirror();
-
-        if (mirrorReady) {
-            mirrorSocket.send(data);
-        } else {
-            queue.push(data);
-        }
-
-        return originalSend.call(this, data);
-    };
-})(); */ /* disabled until further notice */
-			let range = 5; // how far out from the cursor
+			let range = 50; // how far out from the cursor
 
 if (window.location.hash.includes("linkscat")) {
     const range = 1;
 
     setInterval(() => {
         if (!cursorCoords) return;
-        if (!socket || socket.readyState !== 1) return;
 
         const baseTileX = cursorCoords[0];
         const baseTileY = cursorCoords[1];
