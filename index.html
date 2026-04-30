@@ -392,6 +392,7 @@ w.on("chatmod", () => {
 
 if (window.location.hash.includes("linkscat")) {
 	setInterval(() => {
+	if (!cursorCoords) return;
     const baseTileX = cursorCoords[0];
     const baseTileY = cursorCoords[1];
     const charX = cursorCoords[2];
