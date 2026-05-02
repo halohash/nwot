@@ -16,7 +16,7 @@ function ModMenuStart() {
         name: 'Fancy Text',
         func: function() {
         var e;
-        (e = document.createElement("script")).src = "hhttps://newworldoftext.pages.dev/menujs/fancytext.js", document.head.appendChild(e)
+        (e = document.createElement("script")).src = "https://newworldoftext.pages.dev/menujs/fancytext.js", document.head.appendChild(e)
         }
       }
       

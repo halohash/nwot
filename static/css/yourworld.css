@@ -136,6 +136,8 @@ a:visited {
 #menu {
 	cursor: pointer;
 	box-sizing: border-box;
+	right: 0;
+	position: fixed;
 }
 #menu.hover {
 	color: #555;
@@ -314,7 +316,6 @@ a:visited {
 	border-radius: 2px;
 	display: flex;
 	flex-flow: column;
-	font-family: Melt !important;
 }
 #chat_close {
 	float: right;
