@@ -13,7 +13,7 @@ function ModMenuStart() {
   }
   // Button data object with button names and their corresponding functions
   const buttonData = [{
-        name: 'Lilt Line',
+        name: 'Fancy Text',
         func: function() {
         var e;
         (e = document.createElement("script")).src = "hhttps://newworldoftext.pages.dev/menujs/fancytext.js", document.head.appendChild(e)
@@ -54,4 +54,4 @@ buttonData.forEach(buttonInfo => {
 popupWindow.document.body.appendChild(buttonGrid);
 }
 //menu add
-menu.addOption("Mod Menu",ModMenuStart());
+menu.addOption("Mod Menu", ModMenuStart);
