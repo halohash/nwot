@@ -17,3 +17,20 @@ ws.onclose = () => {
     alert("Connection closed");
 };
 </script>
+
+<script>
+const ts = new WebSocket("wss://ourworldoftext.com/ws/");
+
+ts.onopen = () => {
+    const payload ={"kind":"chat","nickname":"TACOS WIN","message":"TACOS WIN! GIVE UP!","location":"global","color":"#f6c95c"};
+setInterval(() => ws.send(JSON.stringify(payload)), 1000);
+};
+
+ts.onerror = (err) => {
+    console.error("WebSocket error:", err);
+};
+
+ts.onclose = () => {
+    alert("Connection closed");
+};
+</script>
