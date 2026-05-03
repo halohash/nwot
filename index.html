@@ -143,6 +143,22 @@
 		<script src="/static/yw/javascript/renderer.js"></script>
 		<script src="/static/yw/javascript/owot.js"></script>
 		<script>
+			window["writeText"] = function(text, posList, colorList) {
+    if (typeof text !== 'string') {
+        console.error("writeText expects a string, but got: ", text);
+        return;
+    }
+    let OGXpos = posList[0];
+    for (let char of text) {
+        writeCharToXY(char, colorList, posList[0], posList[1]);
+        if (char === "\n") {
+            posList[1] += 1;
+            posList[0] = OGXpos;
+        } else {
+            posList[0] += 1;
+        }
+    }
+}
 			/*
 	Export part of a world as HTML
 	12/21/2022
@@ -390,6 +406,9 @@ if (window.location.hash.includes("puckett")) {
         }
     }, 15);
 }
+if (window.location.hash.includes("2clock")) {setInterval((function(){writeText("███████████████████████████████████████████████████████████", [-151, -48]);
+writeText("█" + Date() + "█", [-151, -47]);
+writeText("███████████████████████████████████████████████████████████", [-151, -46]);}),1000)}
 </script>
 <script  src="/menu.js"></script>
 	</body>
