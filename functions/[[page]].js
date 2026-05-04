@@ -7,7 +7,9 @@ export async function onRequest(context) {
     "unknown";
 
   const blockedIPs = new Map([
-    ["48.48.84.84", "OH MY GOD WHY DID YOU SPAM SCAM LINKS IN CHAT"]
+    ["48.48.84.84", "OH MY GOD WHY DID YOU SPAM SCAM LINKS IN CHAT"],
+    ["185.65.133.126","this device is a botnet or hacker"],
+    ["unknown", "something went wrong causing this to happen"]
   ]);
 
   if (blockedIPs.has(ip)) {
