@@ -20,7 +20,7 @@ register_chat_command("search", function(args) {
 		});
 	}
 	if(!window.OWOTSearchUtil) {
-		w.loadScript("https://halohash.github.io/worldofhash/static/yw/javascript/search_util.js", doSearch);
+		w.loadScript("/static/yw/javascript/search_util.js", doSearch);
 	} else {
 		doSearch();
 	}

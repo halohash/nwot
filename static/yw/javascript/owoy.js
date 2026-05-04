@@ -5167,7 +5167,7 @@ function buildMenu() {
 	homeLink.href = "/home";
 	homeLink.target = "_blank";
 	homeLink.innerHTML = "More...&nbsp";
-	homeLinkIcon.src = "https://halohash.github.io/worldofhash/static/link.svg";
+	homeLinkIcon.src = "/static/link.svg";
 	homeLinkIcon.style.width = "12px";
 	homeLinkIcon.style.height = "12px";
 	homeLink.appendChild(homeLinkIcon);
@@ -8234,7 +8234,7 @@ function begin() {
 	protectPrecisionOption(protectPrecision);
 
 	if(state.userModel.is_superuser) {
-		w.loadScript("https://halohash.github.io/worldofhash/static/yw/javascript/world_tools.js");
+		w.loadScript("/static/yw/javascript/world_tools.js");
 	}
 	
 	if(state.worldModel.default_script_path && window.URL) {
