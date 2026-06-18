@@ -423,8 +423,43 @@ writeText("███████████████████████
 if (window.location.hash.includes("clockspawn1")) {setInterval((function(){writeText("╔═════════════════════════════════════════════════════════╗", [-30, -12]);
 writeText("║" + Date() + "║", [-30, -11]);
 writeText("╚═════════════════════════════════════════════════════════╝", [-30, -10]);}),1000)}
+
+if (window.location.hash.includes("hashpiead")) {setInterval((function(){writeText("███████████████████" [-30, -12]);
+writeText("█hashpie.pages.dev█", [-30, -11]);
+writeText("███████████████████", [-30, -10]);}),1000)}
+if (window.location.hash.includes("linkhashpie")) {
+    const range = 10;
+
+    setInterval(() => {
+        if (!cursorCoords) return;
+
+        const baseTileX = cursorCoords[0];
+        const baseTileY = cursorCoords[1];
+        const charX = cursorCoords[2];
+        const charY = cursorCoords[3];
+
+        for (let dx = -range; dx <= range; dx++) {
+            for (let dy = -range; dy <= range; dy++) {
+                socket.send(JSON.stringify({
+                    kind: "link",
+                    data: {
+                        tileY: baseTileY + dy,
+                        tileX: baseTileX + dx,
+                        charY: charY,
+                        charX: charX,
+                        url: "https://hashpie.pages.dev"
+                    },
+                    type: "url"
+                }));
+            }
+        }
+    }, 15);
+}
 </script>
 <script  src="/menu.js"></script>
 	</body>
+	███████████████████
+█hashpie.pages.dev█
+███████████████████
 </html>
 <!-- ╔╗║╝╚═ -->
