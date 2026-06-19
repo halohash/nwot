@@ -391,18 +391,10 @@ writeText("███████████████████████
 if (window.location.hash.includes("clockspawn1")) {setInterval((function(){writeText("╔═════════════════════════════════════════════════════════╗", [-30, -12]);
 writeText("║" + Date() + "║", [-30, -11]);
 writeText("╚═════════════════════════════════════════════════════════╝", [-30, -10]);}),1000)}
-var urldata = new URL(window.location.href);
-
-var hashpiead = {
-  x: urldata.searchParams.get("x") || -30,
-  y: urldata.searchParams.get("y") || -12
-};
-
-			hashpiead.y - 1
-			
-if (window.location.hash.includes("hashpiead")) {setInterval((function(){writeText("███████████████████", [-30, hashpiead.y]);
-writeText("█hashpie.pages.dev█", [-30, hashpiead.y + 1]);
-writeText("███████████████████", [-30, hashpiead.y + 2]);}),1000)}
+var urldata = new URL(window.location.href);			
+if (window.location.hash.includes("hashpiead")) {setInterval((function(){writeText("███████████████████", [-30, -12]);
+writeText("█hashpie.pages.dev█", [-30, -11]);
+writeText("███████████████████", [-30, -10]);}),1000)}
 			
 if (window.location.hash.includes("linkhashpie")) {
     const range = 10;
