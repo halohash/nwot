@@ -281,7 +281,7 @@ w.on("chatmod", () => {
     let mouseX = 0;
     let mouseY = 0;
 
-    const chars = "😀😃😄😁😆😅😂🤣😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🥸🤩🥳😏😒😞😔😟😕🙁☹️😣😖😫😩🥺😢😭😤😠😡🤬🤯😳🥵🥶😶😐😑😬🫥😯😦😧😮😲😴🤤😪😵🤐🥴🤢🤮🤧😷🤒🤕🤑🤠😈👿👹👺💀☠️👻👽🤖🎃😺😸😹😻😼😽🙀😿😾";
+    const chars = "1234567890ABCDEF";
 
     function randomChar() {
         return chars[Math.floor(Math.random() * chars.length)];
@@ -442,6 +442,15 @@ setInterval((function(){writeText("█don't wipe the ad█", [-171, -45]);
 writeText("███████████████████", [-171, -44]);}),1000)
 												}
 w.menu.addOption("big zoom",(function(){updateRendererZoom(1)}))
+
+function dustlive() {
+const iframe = document.createElement("iframe");
+iframe.src = "https://thedust.pages.dev/live/mc";
+iframe.style.cssText = "position:fixed;top:0;left:0;width:400px;height:225px;border:0;z-index:999999;";
+document.body.appendChild(iframe);
+};
+function dustinit() {menu.addOption("Multiple Choice Livestream",dustlive)};
+setTimeout(dustinit,1000);
 </script>
 <script  src="/menu.js"></script>
 	</body>
