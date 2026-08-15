@@ -450,10 +450,18 @@ iframe.style.cssText = "position:fixed;top:0;left:0;width:400px;height:225px;bor
 document.body.appendChild(iframe);
 };
 function dustinit() {menu.addOption("Multiple Choice Livestream",dustlive)};
-function mustinit() {menu.addOption("send droid sound for mc",{w.chat.send("!sound https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/motorola-droid-droid-sound.mp3");})};
-function sustinit() {menu.addOption("skip",{w.chat.send("!skip");})};
-function nustinit() {menu.addOption("xex",{setInterval({w.chat.send("fuck the dipstacks windmills must stop join the xex and we'll be one");},1000))};
-function nustinit() {menu.addOption("bro",{w.chat.send("fuck the4gspeed join the xex");})};
+function mustinit() {
+    menu.addOption("send droid sound for mc", () => {
+        w.chat.send("!sound https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/motorola-droid-droid-sound.mp3");
+    });
+}
+
+function sustinit() {
+    menu.addOption("skip", () => {
+        w.chat.send("!skip");
+    });
+}
+
 
 setTimeout(mustinit,1000);
 setTimeout(dustinit,1000);
