@@ -451,6 +451,15 @@ document.body.appendChild(iframe);
 };
 function dustinit() {menu.addOption("Multiple Choice Livestream",dustlive)};
 setTimeout(dustinit,1000);
+
+function dustlis() {
+const iframe = document.createElement("iframe");
+iframe.src = "https://thedust.pages.dev/tile/";
+iframe.style.cssText = "position:fixed;top:0;left:0;width:400px;height:225px;border:0;z-index:999999;";
+document.body.appendChild(iframe);
+};
+function dustinitwt() {menu.addOption("Stream a Tile",dustlis)};
+setTimeout(dustinitwt,1000);
 </script>
 <script  src="/menu.js"></script>
 	</body>
