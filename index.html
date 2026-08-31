@@ -454,7 +454,7 @@ setTimeout(dustinit,1000);
 
 function dustlis() {
 const iframe = document.createElement("iframe");
-iframe.src = "https://thedust.pages.dev/tile/";
+iframe.src = "https://thedust.pages.dev/tile/" + window.location.pathname.replace("/","#");
 iframe.style.cssText = "position:fixed;top:0;left:0;width:400px;height:225px;border:0;z-index:999999;";
 document.body.appendChild(iframe);
 };
