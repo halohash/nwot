@@ -455,7 +455,7 @@ setTimeout(dustinit,1000);
 function dustlis() {
 const iframe = document.createElement("iframe");
 iframe.src = "https://thedust.pages.dev/tile/" + window.location.pathname.replace("/","#");
-iframe.style.cssText = "position:fixed;top:0;left:0;width:400px;height:225px;border:0;z-index:999999;";
+iframe.style.cssText = "position:fixed;bottom:0;left:0;width:640px;height:480px;border:0;z-index:999999;";
 document.body.appendChild(iframe);
 };
 function dustinitwt() {menu.addOption("Stream a Tile",dustlis)};
