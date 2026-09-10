@@ -460,6 +460,21 @@ document.body.appendChild(iframe);
 };
 function dustinitwt() {menu.addOption("Stream a Tile",dustlis)};
 setTimeout(dustinitwt,1000);
+
+
+
+</script>
+<script>
+const params = new URLSearchParams(window.location.search);
+
+if (params.has("embed")) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/embedassets/embed.css";
+    document.head.appendChild(link);
+
+    window.document.getElementById("chat_open").click();
+}
 </script>
 <script  src="/menu.js"></script>
 	</body>
