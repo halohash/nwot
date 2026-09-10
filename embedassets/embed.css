@@ -5,3 +5,19 @@
 #chat_open {
     display: none;
 }
+
+#chat_upper, #chat_lower {
+    display: none !important;
+}
+
+#chat_window {
+    width: 288px !important;
+    height: 100vh !important;
+}
+
+#owot {
+    width: 75vw!important;
+    top: 0px;
+    right: 0px;
+    position: fixed;
+}
