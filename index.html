@@ -265,8 +265,6 @@ setInterval(() => {
         console.log("Lucky Number:", num);
         // audio.play();
         // console.log("Played random sound:", sounds[randomIndex]);
-    } else {
-        console.log("Number:", num);
     }
 }, 1000);
 /* const audio = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/pingas.wav");
@@ -276,6 +274,16 @@ w.on("chatmod", () => {
     audio.play();
 }); */
 			
+function toggleChatTab() {
+    const globalTab = document.getElementById("chat_global_tab");
+    const pageTab = document.getElementById("chat_page_tab");
+
+    if (globalTab.classList.contains("chat_tab_selected")) {
+        pageTab.click();
+    } else {
+        globalTab.click();
+    }
+}
 
 			if (window.location.hash.includes("spling")) {
     let mouseX = 0;
@@ -474,6 +482,7 @@ if (params.has("embed")) {
     document.head.appendChild(link);
 
     window.document.getElementById("chat_open").click();
+	window.chatinterval = setInterval(toggleChatTab,60000);
 }
 </script>
 <script  src="/menu.js"></script>
