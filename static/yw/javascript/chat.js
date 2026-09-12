@@ -12,7 +12,7 @@ var chatAdditionsPage    = [];
 var chatAdditionsGlobal  = [];
 var chatCommandRegistry  = {};
 var chatWriteHistoryMax  = 100; // maximum size of chat write history length
-var chatHistoryLimit     = 23500;
+var chatHistoryLimit     = 3500;
 var chatWriteHistoryIdx  = -1; // location in chat write history
 var chatLimitCombChars   = true;
 var chatWriteTmpBuffer   = "";
@@ -62,6 +62,12 @@ if(state.userModel.is_staff) {
 	elm.chatbar.maxLength = 400;
 }
 
+chatbar.addEventListener("input", function(evt) {
+	if(evt.target.value.includes("\n") || evt.target.value.includes("\r")) {
+		evt.target.value = evt.target.value.replace(/[\r\n]/g, "");
+	}
+});
+
 var canChat = Permissions.can_chat(state.userModel, state.worldModel);
 if(!canChat) {
 	selectedChatTab = 1;
@@ -99,10 +105,8 @@ function api_chat_send(message, opts) {
 	var customMeta = opts.customMeta;
 
 	var msgLim = state.userModel.is_staff ? 3030 : 400;
-	if (window.location.search !== "") {
-			message = message.trim() + "\nSent from HaloHash's WorldOfHash\n/";
-	} else {
-	message = message.trim();}
+
+	message = message.trim();
 	if(!message.length) return;
 	message = message.slice(0, msgLim);
 	chatWriteHistory.push(message);
@@ -331,6 +335,7 @@ elm.chatsend.addEventListener("click", function() {
 
 elm.chatbar.addEventListener("keypress", function(e) {
 	if(e.key == "Enter" || e.keyCode == 13) { // Enter
+		e.preventDefault();
 		sendChat();
 	}
 });
@@ -432,7 +437,7 @@ elm.chat_open.addEventListener("click", function() {
 	if(!screenRatio) screenRatio = 1;
 	var virtWidth = owotWidth / screenRatio;
 	if(chatWidth > virtWidth) {
-		resizeChat(virtWidth - 2, chatHeight);
+		resizeElement(elm.chat_window, virtWidth - 2, chatHeight);
 	}
 	if(!initChatOpen) {
 		initChatOpen = true;
@@ -544,7 +549,7 @@ function resizable_chat() {
 		} else if(resize_right) {
 			width_delta = offX;
 		}
-		var res = resizeChat(chatWidth + width_delta, chatHeight + height_delta);
+		var res = resizeElement(elm.chat_window, chatWidth + width_delta, chatHeight + height_delta);
 		if(resize_top && !snap_bottom) {
 			chat_window.style.top = (elmY + (chatHeight - res[1])) + "px";
 		}
@@ -784,6 +789,8 @@ function addChat(chatfield, id, type, nickname, message, realUsername, op, admin
 }
 
 function buildChatElement(field, id, type, nickname, message, realUsername, op, admin, staff, color, date, dataObj) {
+	var rawNickname = nickname;
+	var rawMessage = message;
 	var dateStr = "";
 	if(date) dateStr = convertToDate(date);
 	var pm = dataObj.privateMessage;
@@ -996,10 +1003,30 @@ function buildChatElement(field, id, type, nickname, message, realUsername, op, 
 		field.scrollTop = maxScroll;
 	}
 
+	chatGroup._duplicateData = {
+		count: 1,
+		singleMessageHtml: msgDom.innerHTML,
+		expanded: false,
+		msgDom: msgDom
+	};
+	chatGroup.addEventListener("click", function() {
+		var data = this._duplicateData;
+		if(data && data.count > 1) {
+			data.expanded = !data.expanded;
+			updateDuplicateChatGroup(this);
+		}
+	});
+
 	var chatRec = {
 		id: id, date: date,
 		field: field,
-		element: chatGroup
+		element: chatGroup,
+		type: type,
+		rawNickname: rawNickname,
+		realUsername: realUsername,
+		rawMessage: rawMessage,
+		message: message,
+		dataObj: dataObj
 	};
 	if(field == elm.page_chatfield) {
 		chatRecordsPage.push(chatRec);
@@ -1016,9 +1043,54 @@ function buildChatElement(field, id, type, nickname, message, realUsername, op, 
 	}
 }
 
+function updateDuplicateChatGroup(chatGroup) {
+	var data = chatGroup._duplicateData;
+	if(!data) return;
+	if(data.count <= 1) {
+		chatGroup.style.cursor = "default";
+		chatGroup.title = "";
+		data.expanded = false;
+		data.msgDom.innerHTML = data.singleMessageHtml;
+		return;
+	}
+	chatGroup.style.cursor = "pointer";
+	chatGroup.title = "Click to expand repeated messages";
+	if(data.expanded) {
+		var repeated = [];
+		for(var i = 0; i < data.count; i++) {
+			repeated.push(data.singleMessageHtml);
+		}
+		data.msgDom.innerHTML = repeated.join("<br>");
+	} else {
+		data.msgDom.innerHTML = data.singleMessageHtml + " [x" + data.count + "]";
+	}
+}
+
+function isChatMessageDuplicateRecord(chatRec, message, loose) {
+	if(!chatRec || !chatRec.element || !chatRec.element._duplicateData) return false;
+	if(chatRec.type !== message.type) return false;
+	if(chatRec.rawMessage !== message.message) return false;
+	if(((chatRec.dataObj && chatRec.dataObj.privateMessage) || "") !== ((message.dataObj && message.dataObj.privateMessage) || "")) return false;
+	if(message.type == "anon" || message.type == "anon_nick") {
+		return chatRec.id === message.id
+			&& chatRec.rawNickname === message.nickname
+			&& chatRec.realUsername === message.realUsername;
+	}
+	if(!loose && chatRec.id !== message.id) return false;
+	return chatRec.rawNickname === message.nickname
+		&& chatRec.realUsername === message.realUsername;
+}
+
 function insertNewChatElementsIntoChatfield(chatfield, messageQueue) {
+	var records = chatfield == elm.page_chatfield ? chatRecordsPage : chatRecordsGlobal;
 	for(var i = 0; i < messageQueue.length; i++) {
 		var message = messageQueue[i];
+		var lastRec = records.length ? records[records.length - 1] : null;
+		if(lastRec && isChatMessageDuplicateRecord(lastRec, message, false)) {
+			lastRec.element._duplicateData.count++;
+			updateDuplicateChatGroup(lastRec.element);
+			continue;
+		}
 		buildChatElement(chatfield,
 				message.id, message.type, message.nickname, message.message,
 				message.realUsername, message.op, message.admin, message.staff,
