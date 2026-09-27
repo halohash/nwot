@@ -47,10 +47,36 @@
 		<div id="link_tooltip" class="tooltip" style="display: none;"></div>
 
 		<h1 id="loading">Loading...</h1>
-		<div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="7ccd6dcbbf2863b75b62d4ebd9a9c67b11ab7d3b" /></div>
+		<div style="display:none">
 		<script>
-			var state = {"userModel":{"username":"Placeholder","is_superuser":true,"authenticated":true,"is_member":true,"is_owner":true,"is_staff":true,"is_operator":true},"color_palette":null,"bg_color_palette":null,"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"pingas","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":"","chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":1,"char_rate":[99512,4260000],"write_interval":250,"no_copy":false,"no_chat_global":false},"background":{"path":"","rmod":1,"alpha":1}};
-	state.userModel.username = "NewWorldOfTextUser" + Math.floor(Math.random()*1000)
+			var state = {"userModel":{"username":"NWOTGuest0000","is_superuser":true,"authenticated":true,"is_member":true,"is_owner":true,"is_staff":true,"is_operator":true},"color_palette":null,"bg_color_palette":null,"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"pingas","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":"","chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":1,"char_rate":[99512,4260000],"write_interval":250,"no_copy":false,"no_chat_global":false},"background":{"path":"","x":-106,"y":140,"w":50,"h":50,"rmod":2,"alpha":-1}};
+async function checkLogin() {
+      try {
+        const response = await fetch("https://dingle-accs.pages.dev/api/me", {
+          credentials: "include"
+        });
+
+        if (!response.ok) {
+          throw new Error("User is Logged Out.");
+        }
+
+        const user = await response.json();
+
+        if (user.loggedIn === false) {
+          state.userModel.username = "NWOTGuest" + Math.floor(Math.random()*1000);
+          return;
+        }
+state.userModel.username = escapeHtml(user.username);
+state.background.path = escapeHtml(user.profilePicture);
+
+if (user.username === "Dingle") {
+          state.userModel.username = "DingleXD";
+          return;
+        }
+      } catch (error) {
+        console.error("Authentication check failed:", error);
+      }
+    }
 		</script>
 
 		<textarea autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" style="left: -1000px; top: -1000px; position: absolute;" id="textInput"></textarea>
