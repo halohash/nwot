@@ -66,8 +66,8 @@ async function checkLogin() {
           state.userModel.username = "NWOTGuest" + Math.floor(Math.random()*1000);
           return;
         }
-state.userModel.username = escapeHtml(user.username);
-state.background.path = escapeHtml(user.profilePicture);
+state.userModel.username = user.username;
+state.background.path = user.profilePicture;
 
 if (user.username === "Dingle") {
           state.userModel.username = "DingleXD";
