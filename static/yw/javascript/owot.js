@@ -4509,7 +4509,7 @@ function checkKeyPatterns(combination) {
 function createWsPath() {
 	var search = window.location.search;
 	if(!search) search = "";
-	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://" + window.location.host + state.worldModel.pathname + "/ws/" + search;
+	return "ws" + (window.location.protocol == "https:" ? "s" : "") + "://" + "ourworldoftext.com" + state.worldModel.pathname + "/ws/" + search;
 }
 
 function createSocket(getChatHist) {

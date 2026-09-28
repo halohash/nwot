@@ -1,10 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>New World of Text</title>
+		<title>Our World of Text</title>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-		<meta name="description" content="Our World Of Text but Modded.">
+		<meta name="description" content="Infinitely large website. Write anywhere.">
+		<meta property="og:image" content="/static/logo.png">
 		<link type="text/css" rel="stylesheet" href="/static/css/yourworld.css">
 		
 	</head>
@@ -18,11 +21,14 @@
 		<div id="topbar" class="ui">
 			<div id="topbar_inner">
 				<div id="announce_container"></div>
-				<span id="menu" class="ui-vis tab menu" style="display: none;">
-					<img src="./static/pin.svg" class="menuPin" style="display: none;">
-					<span class="menuText">Menu</span>
-					<span style="font-size:50%">▼</span>
-				</span>
+				<div class="menu-corner">
+					<div id="menu_corner_area"></div>
+					<span id="menu" class="ui-vis tab" style="display: none;">
+						<img src="/static/pin.svg" class="menuPin" style="display: none;">
+						<span class="menuText">Menu</span>
+						<span style="font-size:50%">▼</span>
+					</span>
+				</div>
 			</div>
 		</div>
 		<div id="nav" class="ui menu ui-vis" style="display: none;">
@@ -47,10 +53,8 @@
 		<div id="link_tooltip" class="tooltip" style="display: none;"></div>
 
 		<h1 id="loading">Loading...</h1>
-		<div style="display:none">
 		<script>
-						var state = {"userModel":{"username":"Placeholder","is_superuser":true,"authenticated":true,"is_member":true,"is_owner":true,"is_staff":true,"is_operator":true},"color_palette":null,"bg_color_palette":null,"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"pingas","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":"","chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":1,"char_rate":[99512,4260000],"write_interval":250,"no_copy":false,"no_chat_global":false},"background":{"path":"","rmod":1,"alpha":1}};
-
+			var state = {"userModel":{"username":"","is_superuser":false,"authenticated":true,"is_member":false,"is_owner":false,"is_staff":false,"is_operator":false},"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":window.location.pathname,"chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":-1,"char_rate":[9199,250],"write_interval":10,"no_copy":false,"no_chat_global":false,"no_anon_chat":true,"color_palette":null,"bg_color_palette":null}};
 		</script>
 
 		<textarea autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" style="left: -1000px; top: -1000px; position: absolute;" id="textInput"></textarea>
@@ -108,12 +112,12 @@
 					Global<b id="global_unread" class="unread" style="display: none;">(-)</b>
 				</div>
 				<span id="usr_online"></span>
-				<div id="chat_close">X</div>
+				<div id="chat_close" class="close_button">X</div>
 			</div>
 			<div class="chatfield" id="page_chatfield"></div>
 			<div class="chatfield" id="global_chatfield" style="display: none;"></div>
 			<div id="chat_lower" style="width: 100%; display: flex;">
-				<input style="width: 100%; margin: 3px; margin-right: 0px;" id="chatbar" autocomplete="off" aria-autocomplete="list">
+				 <textarea id="chatbar" rows="1" autocomplete="off" aria-autocomplete="none"></textarea>
 				<button id="chatsend" style="margin: 3px;">Send</button>
 			</div>
 		</div>
@@ -142,365 +146,16 @@
 		<script src="/static/yw/javascript/chat.js"></script>
 		<script src="/static/yw/javascript/renderer.js"></script>
 		<script src="/static/yw/javascript/owot.js"></script>
-		<script>
-			window["writeText"] = function(text, posList, colorList) {
-    if (typeof text !== 'string') {
-        console.error("writeText expects a string, but got: ", text);
-        return;
-    }
-    let OGXpos = posList[0];
-    for (let char of text) {
-        writeCharToXY(char, colorList, posList[0], posList[1]);
-        if (char === "\n") {
-            posList[1] += 1;
-            posList[0] = OGXpos;
-        } else {
-            posList[0] += 1;
-        }
-    }
-}
-			/*
-	Export part of a world as HTML
-	12/21/2022
-	Instructions:
-	Press Alt+D or Ctrl+X and select part of a world. A file will be saved once you let go of your mouse.
-*/
-
-var reg = new RegionSelection();
-reg.init();
-
-reg.onselection(function(start, end, width, height) {
-	var tx = start[0];
-	var ty = start[1];
-	var cx = start[2];
-	var cy = start[3];
-	var name = state.worldModel.name;
-	var res = "";
-	res += "<html>";
-	res += "<head>";
-	res += "<title>World - \"" + encodeURIComponent(name) + "\"</title>";
-	res += "<style>";
-	res += "";
-	res += "</style>";
-	res += "</head>";
-	res += "<body>";
-	res += "<pre style=\"font-family: 'Courier New'; font-size: 16px;\">";
-	var prevColor = 0;
-	for(var y = 0; y < height; y++) {
-		var line = "";
-		for(var x = 0; x < width; x++) {
-			var ci = getCharInfo(tx, ty, cx, cy);
-			
-			var char = html_tag_esc(ci.char);
-			char = char.replace(/\t/g, " ");
-			char = char.replace(/\r/g, " ");
-			char = char.replace(/\n/g, " ");
-			var color = ci.color;
-			
-			if(prevColor == color) {
-				res += char;
-			} else {
-				if(prevColor > 0) {
-					res += "</span>";
-				}
-				if(color > 0) {
-					res += "<span style=\"color:#" + (color.toString(16).padStart(6, 0)) + "\">";
-				}
-				res += char;
-			}
-			
-			prevColor = color;
-			
-			cx++;
-			if(cx >= 16) {
-				cx = 0;
-				tx++;
-			}
-		}
-		cy++;
-		if(cy >= 8) {
-			ty++;
-			cy = 0;
-		}
-		cx = start[2];
-		tx = start[0];
-		if(prevColor > 0) {
-			res += "</span>";
-		}
-		prevColor = 0;
-		res += "<br>";
-	}
-	res += "</pre>";
-	res += "</body>";
-	res += "</html>";
-	
-	var save = document.createElement("a");
-	var blob = new Blob([res], {type: "text/html"});
-	var url = window.URL.createObjectURL(blob);
-	save.href = url;
-	save.download = "export-" + Date.now() + ".html";
-	save.click();
-	window.URL.revokeObjectURL(blob);
-});
-w.on("keydown", function(e) {
-	if(checkKeyPress(e, ["ALT+M", "CTRL+X"])) {
-		e.preventDefault();
-		reg.startSelection();
-	}
-});
-const sounds = [
-    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/piness.wav",
-    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/pingas.wav",
-    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/bruh.wav",
-    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/motorola-droid-droid-sound.mp3",
-    "https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/fahhh.mp3"
-];
-
-setInterval(() => {
-    const num = Math.floor(Math.random() * 1001); // 0–1000
-
-    if (num === 100) {
-        const randomIndex = Math.floor(Math.random() * sounds.length);
-        const audio = new Audio(sounds[randomIndex]);
-        console.log("Lucky Number:", num);
-        // audio.play();
-        // console.log("Played random sound:", sounds[randomIndex]);
-    }
-}, 1000);
-/* const audio = new Audio("https://file.garden/aUYIWVAKvQxCBY-_/database/sfx/pingas.wav");
-
-w.on("chatmod", () => {
-    audio.currentTime = 0;
-    audio.play();
-}); */
-			
-function toggleChatTab() {
-    const globalTab = document.getElementById("chat_global_tab");
-    const pageTab = document.getElementById("chat_page_tab");
-
-    if (globalTab.classList.contains("chat_tab_selected")) {
-        pageTab.click();
-    } else {
-        globalTab.click();
-    }
-}
-
-			if (window.location.hash.includes("spling")) {
-    let mouseX = 0;
-    let mouseY = 0;
-
-    const chars = "1234567890ABCDEF";
-
-    function randomChar() {
-        return chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    setInterval(() => {
-        const po = getTileCoordsFromMouseCoords(mouseX, mouseY);
-        const curX = po[0] * 16 + po[2];
-        const curY = po[1] * 8 + po[3];
-
-        const ch = randomChar();
-
-        writeCharToXY(ch, 0, curX, curY);
-
-        setTimeout(() => {
-            writeCharToXY(randomChar(), 0, curX, curY);
-        }, 200);
-
-        setTimeout(() => {
-            for (let i = 0; i < Math.floor(Math.random() * 34); i++) {
-                writeCharToXY(
-                    randomChar(),
-                    0,
-                    curX - Math.floor(Math.random() * 12) - Math.floor(Math.random() * 20),
-                    curY + Math.floor(Math.random() * 10)
-                );
-            }
-        }, 4);
-    }, 10);
-}
-
-if (window.location.hash.includes("linkscat")) {
-    const range = 5;
-
-    setInterval(() => {
-        if (!cursorCoords) return;
-
-        const baseTileX = cursorCoords[0];
-        const baseTileY = cursorCoords[1];
-        const charX = cursorCoords[2];
-        const charY = cursorCoords[3];
-
-        for (let dx = -range; dx <= range; dx++) {
-            for (let dy = -range; dy <= range; dy++) {
-                socket.send(JSON.stringify({
-                    kind: "link",
-                    data: {
-                        tileY: baseTileY + dy,
-                        tileX: baseTileX + dx,
-                        charY: charY,
-                        charX: charX,
-                        url: "https://tv36.pages.dev"
-                    },
-                    type: "url"
-                }));
-            }
-        }
-    }, 50);
-}
-if (window.location.hash.includes("puckett")) {
-    const range = 10;
-
-    setInterval(() => {
-        if (!cursorCoords) return;
-
-        const baseTileX = cursorCoords[0];
-        const baseTileY = cursorCoords[1];
-        const charX = cursorCoords[2];
-        const charY = cursorCoords[3];
-
-        for (let dx = -range; dx <= range; dx++) {
-            for (let dy = -range; dy <= range; dy++) {
-                socket.send(JSON.stringify({
-                    kind: "link",
-                    data: {
-                        tileY: baseTileY + dy,
-                        tileX: baseTileX + dx,
-                        charY: charY,
-                        charX: charX,
-                        url: "note:SAM PUCKETT IS MY QUEEN!"
-                    },
-                    type: "url"
-                }));
-            }
-        }
-    }, 15);
-}
-if (window.location.hash.includes("2clock")) {setInterval((function(){writeText("███████████████████████████████████████████████████████████", [-151, -48]);
-writeText("█" + Date() + "█", [-151, -47]);
-writeText("███████████████████████████████████████████████████████████", [-151, -46]);}),1000)}
-
-
-if (window.location.hash.includes("1clock")) {setInterval((function(){writeText("╔═════════════════════════════════════════════════════════╗", [-151, -48]);
-writeText("║" + Date() + "║", [-151, -47]);
-writeText("╚═════════════════════════════════════════════════════════╝", [-151, -46]);}),1000)}
-
-if (window.location.hash.includes("clockspawn2")) {setInterval((function(){writeText("███████████████████████████████████████████████████████████", [-30, -12]);
-writeText("█" + Date() + "█", [-30, -11]);
-writeText("███████████████████████████████████████████████████████████", [-30, -10]);}),1000)}
-
-
-if (window.location.hash.includes("clockspawn1")) {setInterval((function(){writeText("╔═════════════════════════════════════════════════════════╗", [-30, -12]);
-writeText("║" + Date() + "║", [-30, -11]);
-writeText("╚═════════════════════════════════════════════════════════╝", [-30, -10]);}),1000)}
-var urldata = new URL(window.location.href);			
-if (window.location.hash.includes("hashpiead2")) {setInterval((function(){writeText("███████████████████", [-30, -12]);
-writeText("█hashpie.pages.dev█", [-30, -11]);
-writeText("███████████████████", [-30, -10]);}),1000)}
-
-if (window.location.hash.includes("hashpiead")) {setInterval((function(){writeText("███████████████████", [50, -12]);
-writeText("█hashpie.pages.dev█", [50, -11]);
-writeText("███████████████████", [50, -10]);}),1000)
-setInterval((function(){writeText("█don't wipe the ad█", [50, -9]);
-writeText("███████████████████", [50, -8]);}),1000)
-												}
-			
-if (window.location.hash.includes("linkhashpie")) {
-    const range = 10;
-
-    setInterval(() => {
-        if (!cursorCoords) return;
-
-        const baseTileX = cursorCoords[0];
-        const baseTileY = cursorCoords[1];
-        const charX = cursorCoords[2];
-        const charY = cursorCoords[3];
-
-        for (let dx = -range; dx <= range; dx++) {
-            for (let dy = -range; dy <= range; dy++) {
-                socket.send(JSON.stringify({
-                    kind: "link",
-                    data: {
-                        tileY: baseTileY + dy,
-                        tileX: baseTileX + dx,
-                        charY: charY,
-                        charX: charX,
-                        url: "https://hashpie.pages.dev"
-                    },
-                    type: "url"
-                }));
-            }
-        }
-    }, 15);
-}
-if (window.location.hash.includes("hashpiead3")) {setInterval((function(){writeText("███████████████████", [-151, -48]);
-writeText("█hashpie.pages.dev█", [-151, -47]);
-writeText("███████████████████", [-151, -46]);}),1000)}
-
-if (window.location.hash.includes("hashpiead4")) {setInterval((function(){writeText("███████████████████", [-171, -48]);
-writeText("█hashpie.pages.dev█", [-171, -47]);
-writeText("███████████████████", [-171, -46]);}),1000)
-setInterval((function(){writeText("█don't wipe the ad█", [-171, -45]);
-writeText("███████████████████", [-171, -44]);}),1000)
-												}
-w.menu.addOption("big zoom",(function(){updateRendererZoom(1)}))
-
-function dustlive() {
-const iframe = document.createElement("iframe");
-iframe.src = "https://thedust.pages.dev/live/mc";
-iframe.style.cssText = "position:fixed;top:0;left:0;width:400px;height:225px;border:0;z-index:999999;";
-document.body.appendChild(iframe);
-};
-function dustinit() {menu.addOption("Multiple Choice Livestream",dustlive)};
-setTimeout(dustinit,1000);
-
-function dustlis() {
-const iframe = document.createElement("iframe");
-iframe.src = "https://thedust.pages.dev/tile/" + window.location.pathname.replace("/","#");
-iframe.style.cssText = "position:fixed;bottom:0;left:0;width:640px;height:480px;border:0;z-index:999999;";
-document.body.appendChild(iframe);
-};
-function dustinitwt() {menu.addOption("Stream a Tile",dustlis)};
-setTimeout(dustinitwt,1000);
-
-
-
-</script>
+<script src="https://dingle-accs.pages.dev/account.min.js"></script>
 <script>
-async function checkLogin() {
-      try {
-        const response = await fetch("https://dingle-accs.pages.dev/api/me", {
-          credentials: "include"
-        });
+window.addEventListener("load",(function(){
 
-        if (!response.ok) {
-          throw new Error("User is Logged Out.");
-        }
+if (window.dinglestats.loggedIn) {
 
-        const user = await response.json();
+	window.state.userModel.username = window.dinglestats.username;
 
-        if (user.loggedIn === false) {
-          state.userModel.username = "NWOTGuest" + Math.floor(Math.random()*1000);
-          return;
-        }
-state.userModel.username = user.username;
-state.background.path = user.profilePicture;
-w.redraw();
-if (user.username === "Dingle") {
-          state.userModel.username = "DingleXD";
-          return;
-        }
-      } catch (error) {
-        console.error("Authentication check failed:", error);
-      }
-    }
-checkLogin();
+} else {window.state.userModel.username = "NWOT" + Math.floor(Math.random()*10000);}
+}))
 
 const params = new URLSearchParams(window.location.search);
 
@@ -515,7 +170,5 @@ if (params.has("embed")) {
 	changeZoom(1);
 }
 </script>
-<script  src="/menu.js"></script>
 	</body>
 </html>
-<!-- ╔╗║╝╚═ -->
