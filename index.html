@@ -149,12 +149,14 @@
 <script src="https://dingle-accs.pages.dev/account.min.js"></script>
 <script>
 window.addEventListener("load",(function(){
-
+window.loginredirect = function () {window.location.replace("/login")};
 if (window.dinglestats.loggedIn) {
 
 	window.state.userModel.username = window.dinglestats.username;
-
-} else {window.state.userModel.username = "NWOT" + Math.floor(Math.random()*10000);}
+    w.doAnnounce(`You're logged into Dingle as ${window.dinglestats.username}`)
+} else {window.state.userModel.username = "NWOT" + Math.floor(Math.random()*10000);
+w.menu.addCornerButton("Log Into Dingle",loginredirect);
+}
 }))
 
 const params = new URLSearchParams(window.location.search);
