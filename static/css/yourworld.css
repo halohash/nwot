@@ -136,8 +136,6 @@ a:visited {
 #menu {
 	cursor: pointer;
 	box-sizing: border-box;
-	right: 0;
-	position: fixed;
 }
 #menu.hover {
 	color: #555;
@@ -220,6 +218,18 @@ a:visited {
 	background-color: rgb(104, 104, 104);
 	text-align: center;
 	color: white;
+}
+#chatbar {
+	width: 100%;
+	margin: 3px;
+	margin-right: 0px;
+	resize: none;
+	font-family: Arial, system-ui, Roboto, Ubuntu, Verdana, monospace;
+	white-space: nowrap;
+	overflow: hidden;
+	padding-inline: 1px;
+	padding-block: 2px;
+	font-size: 10pt;
 }
 #chat_open {
 	position: absolute;
@@ -630,11 +640,4 @@ a:visited {
 }
 .longpress-option:active {
 	background-color: #CDCDFF;
-}
-@font-face {
-	font-family: "lightboto";
-	src: url(https://tv36.pages.dev/assets/Roboto-Light.ttf)
-}
-* {
-    font-family: lightboto, Tahoma !important;
 }
