@@ -54,7 +54,10 @@
 
 		<h1 id="loading">Loading...</h1>
 		<script>
-			var state = {"userModel":{"username":"","is_superuser":true,"authenticated":true,"is_member":true,"is_owner":true,"is_staff":true,"is_operator":true},"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":window.location.pathname.replace("/",""),"chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":-1,"char_rate":[20480,1000],"write_interval":10,"no_copy":false,"no_chat_global":false,"no_anon_chat":true,"color_palette":null,"bg_color_palette":null}};
+function getpath() {
+ if (window.location.pathname === "/") {return window.location.pathname.replace("/","")} else {return window.location.pathname}
+}
+			var state = {"userModel":{"username":"","is_superuser":true,"authenticated":true,"is_member":true,"is_owner":true,"is_staff":true,"is_operator":true},"worldModel":{"feature_membertiles_addremove":true,"writability":0,"feature_url_link":0,"feature_go_to_coord":0,"name":"","feature_paste":0,"readability":0,"feature_coord_link":0,"pathname":getpath(),"chat_permission":0,"color_text":0,"color_cell":0,"quick_erase":1,"show_cursor":-1,"char_rate":[20480,1000],"write_interval":10,"no_copy":false,"no_chat_global":false,"no_anon_chat":true,"color_palette":null,"bg_color_palette":null}};
 		</script>
 
 		<textarea autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" style="left: -1000px; top: -1000px; position: absolute;" id="textInput"></textarea>
