@@ -245,6 +245,7 @@ class WTWTracker {
 	init() {
 		this.build();
 		this.hide();
+		/*
 		this.world.menu.addCornerButton("RL", () => {
 			this.show();
 			if(!this.hasInitiallyOpened) {
@@ -252,6 +253,7 @@ class WTWTracker {
 			}
 			this.hasInitiallyOpened = true;
 		});
+		*/
 
 		this.world.registerHook("renderchar", () => {
 			if(this.doShowChars) {

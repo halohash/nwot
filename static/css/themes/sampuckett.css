@@ -17,6 +17,7 @@
 /* GENERAL */
 
 body {
+	font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif!important;
     background: #171717!important;
     color: #eeeeee!important;
 }
@@ -281,10 +282,6 @@ body {
 
 /* COLOR BUTTONS */
 
-.color_btn {
-    background-color: #111111!important;
-    border-color: #ff1493!important;
-}
 
 .color_btn:hover {
     border-color: #ffd600!important;
