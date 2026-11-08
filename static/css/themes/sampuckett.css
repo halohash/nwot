@@ -2,404 +2,409 @@
 			SAM PUCKETT THEME 
 	"I don't do cute. I do awesome." 
 ========================================== */
+/* ==========================================
+   SAM PUCKETT THEME
+   Hot pink, black & yellow
+   ========================================== */
 
 :root {
-  --sam-pink: #ff1493;
-  --sam-hot-pink: #ff007f;
-  --sam-black: #111111;
-  --sam-dark: #1b1b1b;
-  --sam-gray: #303030;
-  --sam-yellow: #ffd600;
+    --sam-pink: #ff1493;
+    --sam-black: #111111;
+    --sam-dark: #202020;
+    --sam-yellow: #ffd600;
 }
 
 /* GENERAL */
 
 body {
-  background-color: #181818;
-  color: #eeeeee;
+    background: #171717;
+    color: #eeeeee;
 }
 
 /* ANNOUNCEMENTS */
 
 .announce_text {
-  background-color: #ff1493;
-  color: #111111;
-  border: 1px solid #111111;
-  border-radius: 3px;
+    background-color: #ff1493;
+    color: #111111;
+    border-radius: 3px;
+    box-shadow: 2px 2px 0 #000000;
 }
 
 .announce_text > a {
-  color: #ffffff;
+    color: white;
 }
 
 .announce_text > a:hover {
-  color: #ffd600;
+    color: #ffd600;
 }
 
 .announce_close {
-  background-color: #333333;
-  color: #ff1493;
+    background-color: #333333;
+    color: #ff1493;
 }
 
 .announce_close:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 /* INTERFACE */
 
 .ui {
-  color: #eeeeee;
+    color: #eeeeee;
 }
 
 .ui-vis {
-  background-color: rgba(255, 20, 147, 0.15);
+    background-color: rgba(255, 20, 147, 0.15);
 }
 
 .corner-tab:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 .corner-tab:active {
-  background-color: #ffd600;
-  color: #111111;
+    background-color: #ffd600;
+    color: #111111;
 }
 
 /* MENUS */
 
 #menu.hover {
-  background-color: #ff1493;
-  color: #111111;
+    color: #ff1493;
+    background: #222222;
+    border-left-color: #ff1493;
 }
 
 #nav {
-  background-color: #202020;
-  color: #ffffff;
-  border-left: 1px solid #ff1493;
-  border-bottom: 1px solid #ff1493;
+    background: #202020;
+    color: white;
+    border-left-color: #ff1493;
+    border-bottom-color: #ff1493;
 }
 
 #nav li {
-  border-top-color: #444444;
+    border-top-color: #444444;
 }
 
 #nav li.hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 /* MESSAGES */
 
 .message {
-  background-color: #292929;
-  color: #ffffff;
-  border: 1px solid #ff1493;
+    background: #292929;
+    color: white;
+    border: 1px solid #ff1493;
 }
 
 .message a {
-  color: #ff1493;
+    color: #ff1493;
 }
 
 .multiplier {
-  color: #ffd600;
+    color: #ffd600;
 }
 
 /* COORDINATES */
 
 #coords {
-  background-color: #202020;
-  color: #ff1493;
+    color: #ff1493;
+    background: #202020;
 }
 
 /* PROTECTION */
 
 #protect_precision {
-  background-color: #292929;
-  color: #ff1493;
+    background-color: #292929;
+    color: #ff1493;
+    border: 1px solid #ff1493;
 }
 
 #protect_selection {
-  color: #ff1493;
+    color: #ff1493;
 }
 
 #protect_selection:hover {
-  color: #ffd600;
+    color: #ffd600;
 }
 
 .protect_button {
-  background-color: #292929;
-  color: #ffffff;
-  border-color: #ff1493;
+    background: #222222;
+    color: white;
+    border-color: #ff1493;
 }
 
 .protect_button:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background: #ff1493;
+    color: #111111;
 }
 
 .auto_prog_panel {
-  background-color: #292929;
-  color: #ff1493;
+    background-color: #292929;
+    color: #ff1493;
+    border: 1px solid #ff1493;
 }
 
 /* CHAT */
 
 #chatbar {
-  background-color: #222222;
-  color: #ffffff;
-  border: 1px solid #ff1493;
+    background: #222222;
+    color: white;
+    border: 1px solid #ff1493;
+    color-scheme: dark;
 }
 
 #chat_open {
-  background-color: #202020;
-  color: #ff1493;
+    background-color: #202020;
+    color: #ff1493;
 }
 
 #chat_open:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 #chat_open:active {
-  background-color: #ffd600;
-  color: #111111;
-}
-
-.chat_tab_button {
-  background-color: #292929;
-  color: #eeeeee;
-  border-color: #555555;
-  border-radius: 2px;
-}
-
-.chat_tab_button:hover {
-  background-color: #ff1493;
-  color: #111111;
-}
-
-.chat_tab_selected {
-  background-color: #ff1493;
-  color: #111111;
-}
-
-.chatfield {
-  background-color: #171717;
-  color: #eeeeee;
-  border-color: #ff1493;
-}
-
-.unread_bar {
-  background-color: #ff1493;
-}
-
-.unread_bar_msg {
-  background-color: #171717;
-  color: #ff1493;
-}
-
-.unread {
-  color: #ff1493;
-}
-
-#total_unread {
-  color: #ffd600;
-}
-
-#chat_window {
-  background-color: #202020;
-  border-color: #ff1493;
+    background-color: #ffd600;
+    color: #111111;
 }
 
 #chatsend {
-  background-color: #ff1493;
-  color: #111111;
-  border-color: #111111;
+    background: #ff1493;
+    color: #111111;
+    border: 1px solid #111111;
 }
 
-/* CLOSE BUTTONS */
+.chat_tab_button {
+    background-color: #292929;
+    color: #eeeeee;
+    border-color: #555555;
+}
+
+.chat_tab_selected {
+    background-color: #ff1493;
+    color: #111111;
+    border-color: #ff1493;
+}
+
+.chatfield {
+    background-color: #171717;
+    color: #eeeeee;
+    border-color: #ff1493;
+}
+
+.chatfield a {
+    color: #ff69b4;
+}
+
+.unread_bar {
+    background-color: #ff1493;
+}
+
+.unread_bar_msg {
+    background-color: #171717;
+    color: #ff1493;
+}
+
+.unread {
+    color: #ff1493;
+}
+
+#total_unread {
+    color: #ffd600;
+}
+
+#chat_window {
+    background-color: #202020;
+    border-color: #ff1493;
+}
+
+/* BUTTONS */
 
 .close_button {
-  background-color: #e60039;
-  color: white;
-  border-color: #770020;
-}
-
-.close_button:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #e60039;
+    color: white;
+    border-color: #770020;
 }
 
 /* CONFIRM WINDOW */
 
 #confirm_js {
-  background-color: #252525;
-  border-color: #ff1493;
-  color: white;
+    background-color: #252525;
+    border-color: #ff1493;
+    color: white;
 }
 
 #confirm_js_code {
-  background-color: #151515;
-  color: #ffd600;
+    background-color: #151515;
+    color: #ffd600;
 }
 
 #confirm_js_cancel {
-  background-color: #333333;
-  color: white;
-  border-color: #ff1493;
+    background-color: #333333;
+    color: white;
+    border-color: #ff1493;
 }
 
 #confirm_js_cancel:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 #confirm_js_cancel_x {
-  background-color: #e60039;
-  color: white;
+    background-color: #e60039;
+    color: white;
 }
 
 #confirm_js_msg {
-  color: white;
+    color: white;
 }
 
 #run_js_confirm,
 #confirm_js_copy {
-  color: #ff1493;
+    color: #ff69b4;
 }
 
 /* SELECTION */
 
 .region_selection {
-  border-color: #ff1493;
+    border-color: #ff1493;
 }
 
 .mobile_selection_handle {
-  background-color: #ff1493;
+    background-color: #ff1493;
+    border: 1px solid white;
 }
 
 /* COLOR BUTTONS */
 
 .color_btn {
-  border-color: #ff1493;
+    background-color: #111111;
+    border-color: #ff1493;
 }
 
 .color_btn:hover {
-  border-color: #ffd600;
+    border-color: #ffd600;
+}
+
+.color_btn:active {
+    border-color: #ff69b4;
 }
 
 /* TABLES */
 
 .worldtools-wtw-datatable {
-  background-color: #202020;
-  color: white;
+    background-color: #202020;
+    color: #eeeeee;
 }
 
 .worldtools-wtw-datatable td:not(:first-child),
 .worldtools-wtw-datatable th:not(:first-child) {
-  border-left-color: #555555;
+    border-left-color: #555555;
 }
 
 .worldtools-wtw-datatable thead {
-  background-color: #ff1493;
-  color: #111111;
-  border-bottom-color: #111111;
+    background-color: #ff1493;
+    color: #111111;
+    border-bottom-color: #111111;
 }
 
 /* MODALS */
 
 #modal_overlay {
-  background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal_frame {
-  background-color: #242424;
-  border: 1px solid #ff1493;
+    background-color: #242424;
+    border: 1px solid #ff1493;
 }
 
 .modal_client {
-  background-color: #191919;
-  color: white;
+    background-color: #191919;
+    color: #eeeeee;
 }
 
 .modal-tab-btn {
-  background-color: #383838;
-  color: white;
+    background-color: #383838;
+    color: white;
 }
 
 .modal-tab-btn:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 .modal_close {
-  color: #ff1493;
+    color: #ff1493;
 }
 
 /* TOOLTIP */
 
 .tooltip {
-  background-color: #171717;
-  color: #ffd600;
-  border-color: #ff1493;
+    background-color: #171717;
+    color: #ffd600;
+    border-color: #ff1493;
 }
 
-/* ERASE AND TEXT DECORATIONS */
+/* ERASE REGION */
 
-#erase_region,
-#text_decorations {
-  background-color: #242424;
-  color: white;
-  border: 1px solid #ff1493;
+#erase_region {
+    background-color: #242424;
+    color: white;
 }
 
 #erase_region_cancel {
-  color: #ff1493;
+    color: #ff1493;
 }
 
 #erase_region_cancel:hover {
-  color: #ffd600;
+    color: #ffd600;
+}
+
+/* TEXT DECORATIONS */
+
+#text_decorations {
+    background-color: #242424;
+    color: white;
 }
 
 .text_deco_btn {
-  color: white;
+    color: white;
 }
 
 .text_deco_btn:hover {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
 
-/* LONG PRESS MENU */
+/* LONG PRESS */
 
 .longpress-options {
-  background-color: #202020;
-  border: 1px solid #ff1493;
-  color: white;
+    background-color: #202020;
+    border: 1px solid #ff1493;
+    color: white;
 }
 
 .longpress-option {
-  color: white;
+    color: white;
 }
 
 .longpress-option:not(:last-child) {
-  border-right-color: #555555;
+    border-right-color: #555555;
 }
 
 .longpress-option:active {
-  background-color: #ff1493;
-  color: #111111;
-}
-
-/* LINKS */
-
-a:hover {
-  color: #ff1493;
+    background-color: #ff1493;
+    color: #111111;
 }
 
 /* TEXT SELECTION */
 
 ::selection {
-  background-color: #ff1493;
-  color: #111111;
+    background-color: #ff1493;
+    color: #111111;
 }
