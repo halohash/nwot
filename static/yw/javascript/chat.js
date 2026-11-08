@@ -284,7 +284,7 @@ register_chat_command("stats", function() {
 }, null, "view stats of a world", null);
 
 function sendChat() {
-	var chatText = elm.chatbar.value;
+	var chatText = elm.chatbar.value.replace(/\u00A0/g, "\u0020");
 	elm.chatbar.value = "";
 	var opts = {};
 	if(defaultChatColor != null) {
@@ -1062,7 +1062,8 @@ function updateDuplicateChatGroup(chatGroup) {
 		}
 		data.msgDom.innerHTML = repeated.join("<br>");
 	} else {
-		data.msgDom.innerHTML = data.singleMessageHtml + " [x" + data.count + "]";
+		//data.msgDom.innerHTML = data.singleMessageHtml + " [x" + data.count + "]";
+		data.msgDom.innerHTML = data.singleMessageHtml + ' <div class="multiplier">[x' + data.count + ']</div>';
 	}
 }
 
@@ -1230,6 +1231,6 @@ function chatType(registered, nickname, realUsername) {
 	}
 	if(registered && !nickMatches) return "user_nick";
 	if(!registered && !nickname) return "anon";
-	if(!registered && nickname) return "user_nick";
+	if(!registered && nickname) return "anon_nick";
 	return type;
 }

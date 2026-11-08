@@ -1,4 +1,4 @@
-var YourWorld = {
+﻿var YourWorld = {
 	Color: window.localStorage ? +localStorage.getItem("color") : 0,
 	BgColor: -1,
 	Nickname: state.userModel.username
@@ -5585,7 +5585,7 @@ function buildMenu() {
 		w.disableColors();
 		setRedrawPatterned("square");
 	}, true);
-	menuOptions.colorsEnabled = menu.addCheckboxOption("Suppress images", function() {
+	menuOptions.suppressImages = menu.addCheckboxOption("Suppress images", function() {
 		w.enableImageSuppression();
 		setRedrawPatterned("square");
 	}, function() {
@@ -6848,7 +6848,7 @@ var network = {
 		});
 	},
 	clear_tile: function(position) {
-		// position: {tileX, tileY, [charX, charY, [width, height]]]}
+		// position: {tileX, tileY, [charX, charY, [charWidth, charHeight]]]}
 		var data = {
 			tileX: position.tileX,
 			tileY: position.tileY

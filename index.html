@@ -2,14 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>New World of Text</title>
+		<title>New World Of Text</title>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 		<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 		<meta name="description" content="Infinitely large website. Write anywhere.">
 		<meta property="og:image" content="/static/logo.png">
-		<link type="text/css" rel="stylesheet" href="/static/css/yourworld.css">
-		
+		<link type="text/css" rel="stylesheet" href="/static/css/themes/sampuckett.css">
 	</head>
 	<body>
 		<div id="main_view">
@@ -53,6 +52,7 @@
 		<div id="link_tooltip" class="tooltip" style="display: none;"></div>
 
 		<h1 id="loading">Loading...</h1>
+		<div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="oh oh oh hi there" /></div>
 		<script>
 function getpath() {
  if (window.location.pathname === "/") {return window.location.pathname.replace("/","")} else {return window.location.pathname}
@@ -149,31 +149,5 @@ function getpath() {
 		<script src="/static/yw/javascript/chat.js"></script>
 		<script src="/static/yw/javascript/renderer.js"></script>
 		<script src="/static/yw/javascript/owot.js"></script>
-<script src="https://dingle-accs.pages.dev/account.min.js"></script>
-<script>
-window.addEventListener("load",(function(){
-window.loginredirect = function () {window.location.replace("/login")};
-if (window.dinglestats.loggedIn) {
-
-	window.state.userModel.username = window.dinglestats.username;
-    w.doAnnounce(`You're logged into Dingle as ${window.dinglestats.username}`)
-} else {window.state.userModel.username = "NWOT" + Math.floor(Math.random()*10000);
-w.menu.addCornerButton("Log Into Dingle",loginredirect);
-}
-}))
-
-const params = new URLSearchParams(window.location.search);
-
-if (params.has("embed")) {
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "/embedassets/embed.css";
-    document.head.appendChild(link);
-
-    window.document.getElementById("chat_open").click();
-	window.chatinterval = setInterval(toggleChatTab,60000);
-	changeZoom(1);
-}
-</script>
 	</body>
 </html>
