@@ -1,219 +1,405 @@
-/* ========================================== SAM PUCKETT THEME "I don't do cute. I do awesome." ========================================== */
+/* ========================================== 
+			SAM PUCKETT THEME 
+	"I don't do cute. I do awesome." 
+========================================== */
 
-:root { --carly-red: #ff1744; --carly-blue: #ff4081; --carly-green: #8bc34a; --carly-yellow: #ffeb3b; --carly-magenta: #ff1493; --carly-black: #090909;
+:root {
+  --sam-pink: #ff1493;
+  --sam-hot-pink: #ff007f;
+  --sam-black: #111111;
+  --sam-dark: #1b1b1b;
+  --sam-gray: #303030;
+  --sam-yellow: #ffd600;
+}
 
---sam-red: #ff1744; --sam-blue: #ff4081; --sam-green: #76b82a; --sam-yellow: #ffd600; --sam-magenta: #ff1493; --sam-black: #090909;
+/* GENERAL */
 
---freddie-red: #e53935; --freddie-blue: #f06292; --freddie-green: #8bc34a; --freddie-yellow: #ffca28; --freddie-magenta: #ec407a; --freddie-black: #151515;
+body {
+  background-color: #181818;
+  color: #eeeeee;
+}
 
---spencer-red: #d50000; --spencer-blue: #ad1457; --spencer-green: #33691e; --spencer-yellow: #f9a825; --spencer-magenta: #880e4f; --spencer-black: #050505;
+/* ANNOUNCEMENTS */
 
---gibby-red: #b71c1c; --gibby-blue: #880e4f; --gibby-green: #558b2f; --gibby-yellow: #f57f17; --gibby-magenta: #ad1457; --gibby-black: #000000;
+.announce_text {
+  background-color: #ff1493;
+  color: #111111;
+  border: 1px solid #111111;
+  border-radius: 3px;
+}
 
---sam-pink: #ff1493; --sam-hot-pink: #ff007f; --sam-dark: #101010; --sam-gray: #252525; --sam-white: #f5f5f5; --sam-yellow: #ffd600; }
+.announce_text > a {
+  color: #ffffff;
+}
 
-/* THE GENERAL ATTITUDE */
+.announce_text > a:hover {
+  color: #ffd600;
+}
 
-* { scrollbar-color: var(--sam-pink) var(--sam-dark); }
+.announce_close {
+  background-color: #333333;
+  color: #ff1493;
+}
 
-body { background: #151515; color: #f5f5f5; font-family: Verdana, Arial, sans-serif; }
+.announce_close:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-/* MAIN CANVAS */
+/* INTERFACE */
 
-#main_view, .screen_canvas { background-color: #151515; }
+.ui {
+  color: #eeeeee;
+}
 
-/* TOP ANNOUNCEMENTS */
+.ui-vis {
+  background-color: rgba(255, 20, 147, 0.15);
+}
 
-.announce_text { background: var(--sam-pink); color: black; border: 2px solid black; border-radius: 0; padding: 4px 9px; font-weight: 900; text-transform: uppercase; box-shadow: 3px 3px 0 black; }
+.corner-tab:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-.announce_text > a { color: white; font-weight: 900; }
-
-.announce_text > a:hover { color: var(--sam-yellow); }
-
-.announce_close { background: #222; color: var(--sam-pink); border: 1px solid var(--sam-pink); border-radius: 0; }
-
-.announce_close:hover { background: var(--sam-pink); color: black; }
-
-/* UI */
-
-.ui { color: #eee; font-family: Verdana, sans-serif; font-weight: bold; }
-
-.ui-vis { background: rgba(255, 20, 147, .15); border: 1px solid var(--sam-pink); padding: 3px; }
-
-.corner-tab:hover { background: var(--sam-pink); color: black; }
-
-.corner-tab:active { background: var(--sam-yellow); color: black; }
+.corner-tab:active {
+  background-color: #ffd600;
+  color: #111111;
+}
 
 /* MENUS */
 
-.menu-corner { gap: 5px; }
+#menu.hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-#menu.hover { background: var(--sam-pink); color: black; border: 1px solid black; }
+#nav {
+  background-color: #202020;
+  color: #ffffff;
+  border-left: 1px solid #ff1493;
+  border-bottom: 1px solid #ff1493;
+}
 
-#nav { background: #181818; color: white; border: 2px solid var(--sam-pink); box-shadow: 4px 4px 0 black; }
+#nav li {
+  border-top-color: #444444;
+}
 
-#nav li { border-top: 1px solid #444; }
-
-#nav li.hover { background: var(--sam-pink); color: black; font-weight: bold; }
-
-#nav a:hover { color: black; }
+#nav li.hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
 /* MESSAGES */
 
-.message { background: #252525; color: white; border: 1px solid var(--sam-pink); box-shadow: 3px 3px 0 #000; }
+.message {
+  background-color: #292929;
+  color: #ffffff;
+  border: 1px solid #ff1493;
+}
 
-.message a { color: var(--sam-pink); text-decoration: underline; }
+.message a {
+  color: #ff1493;
+}
 
-.multiplier { color: var(--sam-yellow); font-weight: 900; }
+.multiplier {
+  color: #ffd600;
+}
 
 /* COORDINATES */
 
-#coords { color: var(--sam-pink); background: #111; border: 1px solid var(--sam-pink); }
+#coords {
+  background-color: #202020;
+  color: #ff1493;
+}
 
-/* PROTECTION CONTROLS */
+/* PROTECTION */
 
-#protect_precision { background: #202020; color: var(--sam-pink); border: 1px solid var(--sam-pink); font-weight: bold; }
+#protect_precision {
+  background-color: #292929;
+  color: #ff1493;
+}
 
-#protect_selection { color: var(--sam-pink); }
+#protect_selection {
+  color: #ff1493;
+}
 
-#protect_selection:hover { color: var(--sam-yellow); }
+#protect_selection:hover {
+  color: #ffd600;
+}
 
-.protect_button { border: 1px solid var(--sam-pink); color: white; background: #222; }
+.protect_button {
+  background-color: #292929;
+  color: #ffffff;
+  border-color: #ff1493;
+}
 
-.protect_button:hover { background: var(--sam-pink); color: black; }
+.protect_button:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-.auto_prog_panel { background: #202020; color: var(--sam-yellow); border: 1px solid var(--sam-pink); }
+.auto_prog_panel {
+  background-color: #292929;
+  color: #ff1493;
+}
 
 /* CHAT */
 
-#chatbar { background: #202020; color: white; border: 1px solid var(--sam-pink); font-weight: bold; }
+#chatbar {
+  background-color: #222222;
+  color: #ffffff;
+  border: 1px solid #ff1493;
+}
 
-#chatbar:focus { outline: 2px solid var(--sam-pink); }
+#chat_open {
+  background-color: #202020;
+  color: #ff1493;
+}
 
-#chat_open { background: #181818; color: var(--sam-pink); border: 1px solid var(--sam-pink); font-weight: bold; }
+#chat_open:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-#chat_open:hover { background: var(--sam-pink); color: black; }
+#chat_open:active {
+  background-color: #ffd600;
+  color: #111111;
+}
 
-#chat_open:active { background: var(--sam-yellow); color: black; }
+.chat_tab_button {
+  background-color: #292929;
+  color: #eeeeee;
+  border-color: #555555;
+  border-radius: 2px;
+}
 
-.chat_tab_button { background: #222; color: white; border: 1px solid #555; border-radius: 0; font-weight: bold; }
+.chat_tab_button:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-.chat_tab_button:hover { background: #383838; border-color: var(--sam-pink); }
+.chat_tab_selected {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-.chat_tab_selected { background: var(--sam-pink); color: black; border-color: black; font-weight: 900; }
+.chatfield {
+  background-color: #171717;
+  color: #eeeeee;
+  border-color: #ff1493;
+}
 
-.chatfield { background: #151515; color: #eee; border: 1px solid var(--sam-pink); border-radius: 0; }
+.unread_bar {
+  background-color: #ff1493;
+}
 
-.unread_bar { background: var(--sam-pink); }
+.unread_bar_msg {
+  background-color: #171717;
+  color: #ff1493;
+}
 
-.unread_bar_msg { background: #151515; color: var(--sam-pink); font-weight: bold; }
+.unread {
+  color: #ff1493;
+}
 
-.unread { color: var(--sam-yellow); font-weight: bold; }
+#total_unread {
+  color: #ffd600;
+}
 
-#total_unread { color: var(--sam-pink); }
+#chat_window {
+  background-color: #202020;
+  border-color: #ff1493;
+}
 
-#chat_window { background: #1c1c1c; border: 2px solid var(--sam-pink); border-radius: 0; box-shadow: 5px 5px 0 black; }
-
-#chatsend { background: var(--sam-pink); color: black; border: 1px solid black; font-weight: 900; }
-
-#chatsend:hover { background: var(--sam-yellow); }
+#chatsend {
+  background-color: #ff1493;
+  color: #111111;
+  border-color: #111111;
+}
 
 /* CLOSE BUTTONS */
 
-.close_button { background: #e60039; color: white; border: 2px solid black; border-radius: 0; font-weight: bold; }
+.close_button {
+  background-color: #e60039;
+  color: white;
+  border-color: #770020;
+}
 
-.close_button:hover { background: var(--sam-yellow); color: black; }
+.close_button:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
 /* CONFIRM WINDOW */
 
-#confirm_js { background: #222; border: 3px solid var(--sam-pink); color: white; box-shadow: 6px 6px 0 black; }
+#confirm_js {
+  background-color: #252525;
+  border-color: #ff1493;
+  color: white;
+}
 
-#confirm_js_code { background: #111; color: var(--sam-yellow); border: 1px solid #555; }
+#confirm_js_code {
+  background-color: #151515;
+  color: #ffd600;
+}
 
-#confirm_js_cancel { background: #333; color: white; border: 1px solid var(--sam-pink); }
+#confirm_js_cancel {
+  background-color: #333333;
+  color: white;
+  border-color: #ff1493;
+}
 
-#confirm_js_cancel:hover { background: var(--sam-pink); color: black; }
+#confirm_js_cancel:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-#confirm_js_cancel_x { background: #e60039; border: 1px solid black; }
+#confirm_js_cancel_x {
+  background-color: #e60039;
+  color: white;
+}
 
-#confirm_js_msg { color: white; }
+#confirm_js_msg {
+  color: white;
+}
 
-#run_js_confirm, #confirm_js_copy { color: var(--sam-pink); }
+#run_js_confirm,
+#confirm_js_copy {
+  color: #ff1493;
+}
 
 /* SELECTION */
 
-.region_selection { border: 2px dashed var(--sam-pink); }
+.region_selection {
+  border-color: #ff1493;
+}
 
-.mobile_selection_handle { background: var(--sam-pink); border: 2px solid black; }
-
-/* WORLD */
-
-#owot { background-image: url("/static/unloaded.png"); }
-
-#owot.nightmode { background-image: url("/static/unloaded_night.png"); }
+.mobile_selection_handle {
+  background-color: #ff1493;
+}
 
 /* COLOR BUTTONS */
 
-.color_btn { border: 2px solid #444; border-radius: 2px; }
+.color_btn {
+  border-color: #ff1493;
+}
 
-.color_btn:hover { border-color: var(--sam-pink); box-shadow: 0 0 5px var(--sam-pink); }
-
-.color_btn:active { border-color: var(--sam-yellow); }
+.color_btn:hover {
+  border-color: #ffd600;
+}
 
 /* TABLES */
 
-.worldtools-wtw-datatable { background: #181818; color: white; border-collapse: collapse; }
+.worldtools-wtw-datatable {
+  background-color: #202020;
+  color: white;
+}
 
-.worldtools-wtw-datatable td:not(:first-child), .worldtools-wtw-datatable th:not(:first-child) { border-left: 1px solid #444; }
+.worldtools-wtw-datatable td:not(:first-child),
+.worldtools-wtw-datatable th:not(:first-child) {
+  border-left-color: #555555;
+}
 
-.worldtools-wtw-datatable thead { background: var(--sam-pink); color: black; border-bottom: 2px solid black; }
+.worldtools-wtw-datatable thead {
+  background-color: #ff1493;
+  color: #111111;
+  border-bottom-color: #111111;
+}
 
 /* MODALS */
 
-#modal_overlay { background: rgba(0, 0, 0, .8); }
+#modal_overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+}
 
-.modal_frame { background: #202020; border: 2px solid var(--sam-pink); box-shadow: 7px 7px 0 black; }
+.modal_frame {
+  background-color: #242424;
+  border: 1px solid #ff1493;
+}
 
-.modal_client { background: #151515; color: white; }
+.modal_client {
+  background-color: #191919;
+  color: white;
+}
 
-.modal-tab-btn { background: #333; color: white; border: 1px solid var(--sam-pink); }
+.modal-tab-btn {
+  background-color: #383838;
+  color: white;
+}
 
-.modal-tab-btn:hover { background: var(--sam-pink); color: black; }
+.modal-tab-btn:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-.modal_close { color: var(--sam-pink); }
-
-.modal_corner_checkbox_label { color: white; }
+.modal_close {
+  color: #ff1493;
+}
 
 /* TOOLTIP */
 
-.tooltip { background: #111; color: var(--sam-yellow); border: 1px solid var(--sam-pink); box-shadow: 3px 3px 0 black; font-weight: bold; }
+.tooltip {
+  background-color: #171717;
+  color: #ffd600;
+  border-color: #ff1493;
+}
 
-/* TEXT DECORATIONS */
+/* ERASE AND TEXT DECORATIONS */
 
-#erase_region, #text_decorations { background: #202020; color: white; border: 1px solid var(--sam-pink); }
+#erase_region,
+#text_decorations {
+  background-color: #242424;
+  color: white;
+  border: 1px solid #ff1493;
+}
 
-#erase_region_cancel { color: var(--sam-pink); }
+#erase_region_cancel {
+  color: #ff1493;
+}
 
-#erase_region_cancel:hover { color: var(--sam-yellow); }
+#erase_region_cancel:hover {
+  color: #ffd600;
+}
 
-.text_deco_btn { color: white; }
+.text_deco_btn {
+  color: white;
+}
 
-.text_deco_btn:hover { background: var(--sam-pink); color: black; }
+.text_deco_btn:hover {
+  background-color: #ff1493;
+  color: #111111;
+}
 
 /* LONG PRESS MENU */
 
-.longpress-options { background: #181818; color: white; border: 2px solid var(--sam-pink); box-shadow: 4px 4px 0 black; }
+.longpress-options {
+  background-color: #202020;
+  border: 1px solid #ff1493;
+  color: white;
+}
 
-.longpress-option { color: white; }
+.longpress-option {
+  color: white;
+}
 
-.longpress-option:not(:last-child) { border-right: 1px solid #555; }
+.longpress-option:not(:last-child) {
+  border-right-color: #555555;
+}
 
-.longpress-option:hover, .longpress-option:active { background: var(--sam-pink); color: black; }
+.longpress-option:active {
+  background-color: #ff1493;
+  color: #111111;
+}
 
-.longpress-close { color: var(--sam-pink); }
+/* LINKS */
 
-/* SAM'S FINAL WORD */
+a:hover {
+  color: #ff1493;
+}
 
-button:hover, input[type="button"]:hover { cursor: pointer; }
+/* TEXT SELECTION */
 
-{ background: var(--sam-pink); color: black; }
+::selection {
+  background-color: #ff1493;
+  color: #111111;
+}
